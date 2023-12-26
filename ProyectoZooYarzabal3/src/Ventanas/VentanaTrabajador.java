@@ -159,23 +159,27 @@ public class VentanaTrabajador extends JFrame{
 			
 			ArrayList<Empleado> trabajadors = BaseDeDatos.VisualizarBD.visualizarEmpleados();
 			
-			if (!trabajadors.contains(t)) {
-				try {
-					
-	 			PrintWriter pw = new PrintWriter(new FileWriter("Empleados.csv", true));
-					pw.println( dni + ";" + nom + ";" + p_tra + ";" + con );
-					JOptionPane.showMessageDialog(null, "Cliente registrado correctamente","REGISTRADO CORRECTAMENTE",JOptionPane.INFORMATION_MESSAGE);
-					System.out.println(t.toString());
-					pw.flush();
-					pw.close();
-					abrirVentana(p_tra);
-				} catch (IOException e1) {
-					// TODO: handle exception
-					JOptionPane.showMessageDialog(null, "No se ha podido registrar el trabajador, compruebe la ubicación del fichero.", "ERROR EN EL REGISTRO", JOptionPane.ERROR_MESSAGE);
+			if (!( txtnomR.getText().trim().isEmpty() || txtDniR.getText().trim().isEmpty() || txtconR.getText().trim().isEmpty() || comboOficios.getSelectedItem().equals("Elige una opcion"))) {
+				if (!trabajadors.contains(t)) {
+					try {
+						
+		 			PrintWriter pw = new PrintWriter(new FileWriter("Empleados.csv", true));
+						pw.println( dni + ";" + nom + ";" + p_tra + ";" + con );
+						JOptionPane.showMessageDialog(null, "Cliente registrado correctamente","REGISTRADO CORRECTAMENTE",JOptionPane.INFORMATION_MESSAGE);
+						System.out.println(t.toString());
+						pw.flush();
+						pw.close();
+						abrirVentana(p_tra);
+					} catch (IOException e1) {
+						// TODO: handle exception
+						JOptionPane.showMessageDialog(null, "No se ha podido registrar el trabajador, compruebe la ubicación del fichero.", "ERROR EN EL REGISTRO", JOptionPane.ERROR_MESSAGE);
 
+					}
+				} else {
+					System.err.println( "El trabajador ya está registrado" );
 				}
 			} else {
-				System.err.println( "El trabajador ya está registrado" );
+				JOptionPane.showMessageDialog(null, "No se ha podido registrar el trabajador, compruebe que todos los campos estén rellenados.", "ERROR EN EL REGISTRO", JOptionPane.ERROR_MESSAGE);
 			}
 			
 			
@@ -207,25 +211,31 @@ public class VentanaTrabajador extends JFrame{
         	
         	ArrayList<Empleado> empleadosExistentes = new ArrayList<>();
         	
-        	try {
-        		Scanner sc = new Scanner(new FileReader( "Empleados.csv" ));
-        		String linea;
-        		while (sc.hasNext()) {
-					linea = sc.nextLine();
-					System.out.println( "Línea: " + linea );
-					String [] partes = linea.split( ";" );
-					String dni = partes[0];
-					String nombre = partes[1];
-					String puestoDeTrabajo = partes[2];
-					String contrasenyaEmpleado = partes[3]; // Aquí vamos a invadir un poco la privacidad del empleado para garantizar un registro de mayor seguridad
-					Empleado empleado = new Empleado(dni, nombre, puestoDeTrabajo, contrasenyaEmpleado);
-					empleadosExistentes.add(empleado);
-					System.out.println(empleadosExistentes); // Para probar
-					
-				}
-        	}catch (FileNotFoundException e1) {
-				// TODO: handle exception
-        		e1.printStackTrace();
+        	if (!(txtDniIS.getText().trim().isEmpty() || txtconIS.getText().trim().isEmpty())) {
+        		try {
+            		Scanner sc = new Scanner(new FileReader( "Empleados.csv" ));
+            		String linea;
+            		while (sc.hasNext()) {
+    					linea = sc.nextLine();
+//    					System.out.println( "Línea: " + linea );
+    					String [] partes = linea.split( ";" );
+    					if (partes.length >= 4) {
+    						String dni = partes[0];
+        					String nombre = partes[1];
+        					String puestoDeTrabajo = partes[2];
+        					String contrasenyaEmpleado = partes[3]; // Aquí vamos a invadir un poco la privacidad del empleado para garantizar un registro de mayor seguridad
+        					Empleado empleado = new Empleado(dni, nombre, puestoDeTrabajo, contrasenyaEmpleado);
+        					empleadosExistentes.add(empleado);
+//        					System.out.println(empleadosExistentes); // Para probar
+    					} 
+    					
+    				}
+            	}catch (FileNotFoundException e1) {
+    				// TODO: handle exception
+            		e1.printStackTrace();
+    			}
+        	}else {
+				JOptionPane.showMessageDialog(null, "No se ha podido iniciar sesión, compruebe que todos los campos estén rellenados.", "ERROR EN EL INICIO DE SESION", JOptionPane.ERROR_MESSAGE);
 			}
         	
         	// Ahora vamos a ver si está registrado o no

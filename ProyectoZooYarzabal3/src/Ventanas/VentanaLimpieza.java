@@ -31,53 +31,55 @@ public class VentanaLimpieza extends JFrame {
         setTitle("Ventana de Limpieza");
         setBounds(500, 300, 700, 400); // Ajuste el tamaño de la ventana según sea necesario
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        
 
-        // Crear lista de tareas
-        listModel = new DefaultListModel<>();
-        listModel.addElement("Limpiar oficina principal");
-        listModel.addElement("Vaciar papeleras");
-        listModel.addElement("Limpiar baños");
-        listModel.addElement("Lavar ventanas");
-
-        listaTareas = new JList<>(listModel);
-        JScrollPane scrollPane = new JScrollPane(listaTareas);
-        add(scrollPane, BorderLayout.CENTER);
-        
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
-        
-        JButton botonCompletar = new JButton( "Completar" );
-        botonCompletar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				completarTarea();
-				
-			}
-
-			private void completarTarea() {
-				// TODO Auto-generated method stub
-				int indice = listaTareas.getSelectedIndex();
-				if( indice != -1 ) {
-					listModel.remove(indice);
-					actualizarBarraProgreso();
-				}else {
-					JOptionPane.showMessageDialog(null, this, "Selecciona una tarea para completarla.", 0);
-				}
-			}
-
-			
-		});
-        
-        panel.add(botonCompletar);
-        
-        barraProgreso = new JProgressBar(0, listModel.size());
-        barraProgreso.setStringPainted(true);
-        actualizarBarraProgreso();
-        
-        panel.add(barraProgreso);
-        add(panel, BorderLayout.SOUTH);
+//        // Crear lista de tareas
+//        listModel = new DefaultListModel<>();
+//        listModel.addElement("Limpiar oficina principal");
+//        listModel.addElement("Vaciar papeleras");
+//        listModel.addElement("Limpiar baños");
+//        listModel.addElement("Lavar ventanas");
+//
+//        listaTareas = new JList<>(listModel);
+//        JScrollPane scrollPane = new JScrollPane(listaTareas);
+//        add(scrollPane, BorderLayout.CENTER);
+//        
+//        JPanel panel = new JPanel();
+//        panel.setLayout(new FlowLayout());
+//        
+//        JButton botonCompletar = new JButton( "Completar" );
+//        botonCompletar.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				completarTarea();
+//				
+//			}
+//
+//			private void completarTarea() {
+//				// TODO Auto-generated method stub
+//				int indice = listaTareas.getSelectedIndex();
+//				if( indice != -1 ) {
+//					listModel.remove(indice);
+//					actualizarBarraProgreso();
+//				}else {
+//					JOptionPane.showMessageDialog(null, this, "Selecciona una tarea para completarla.", 0);
+//				}
+//			}
+//
+//			
+//		});
+//        
+//        panel.add(botonCompletar);
+//        
+//        barraProgreso = new JProgressBar(0, listModel.size());
+//        barraProgreso.setStringPainted(true);
+//        actualizarBarraProgreso();
+//        
+//        panel.add(barraProgreso);
+//        add(panel, BorderLayout.SOUTH);
         
         setVisible(true);
 }
