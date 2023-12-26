@@ -301,7 +301,7 @@ public class VentanaTrabajador extends JFrame{
 		// TODO Auto-generated method stub
 	        switch (tipoTrabajador) {
 	            case "LIMPIEZA":
-	                new VentanaLimpieza(vActual);
+	                new VentanaPersonalLimpieza(vActual);
 	                vActual.dispose();
 	                break;
 	            case "MANTENIMIENTO":
