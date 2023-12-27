@@ -15,7 +15,7 @@ public class VentanaVisitante extends JFrame{
 	private static JFrame vActual;
 	private JFrame vAnterior;
 	private JButton btnEventos, btnMapa, btnInfoAnimales, btnVolver;
-	private JPanel pnlNorte, pnlBotones, pnlSur;
+	private JPanel pnlNorte, pnlBotones;
 	private JLabel lblTitulo;
 //	private EmbeddedMediaPlayerComponent component;
 
@@ -34,7 +34,6 @@ public class VentanaVisitante extends JFrame{
 	
 	public VentanaVisitante(JFrame va) {
 		super();
-		setResizable(false);
 		setTitle( "INFORMACIÓN PARA LOS VISITANTES" );
 		vActual = this;
 		vAnterior = va;
@@ -65,7 +64,7 @@ public class VentanaVisitante extends JFrame{
          * por un JScrollPane, el video será sacado de Youtube, ya que no contamos con
          * los recursos para hacer uno nosotros mismos.
          */
-        
+        JPanel pnlSur = new JPanel();
         JPanel panelPrincipal = new JPanel(new BorderLayout());
 //      panelPrincipal.setBackground(new Color(173, 217, 230));
         
@@ -170,34 +169,116 @@ public class VentanaVisitante extends JFrame{
         panelPrincipal.setBackground(new Color(173, 217, 230));
         panelContenidoPrincipal.add(panelPrincipal, BorderLayout.CENTER);
         
+        //
+//        JPanel pnlTitulo = new JPanel();
+//		pnlTitulo.setBackground(new Color(70, 130, 180));
+////		pnlTitulo.setBackground(new Color(173, 217, 230));
+//		pnlTitulo.setLayout(new FlowLayout(FlowLayout.CENTER));
+//        JLabel lblTitulo = new JLabel( "BIENVENIDO A ZOOYARZABAL" );
+//        lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 40));
+//        lblTitulo.setForeground(Color.white);
+//        pnlTitulo.add(lblTitulo);
+//        pnlTitulo.setPreferredSize(new Dimension(pnlTitulo.getPreferredSize().width, 50));
+//        panelContenidoPrincipal.add(pnlTitulo, BorderLayout.NORTH);
+//        JPanel panelDecoracion = new JPanel();
+//        panelDecoracion.setLayout(new FlowLayout(FlowLayout.CENTER));
+//        JLabel LABEL = new JLabel( "MÁS INFORMACIÓN" );
+//        LABEL.setFont(new Font("Times New Roman", Font.BOLD, 18));
+//        LABEL.setForeground(Color.white);
+//        panelDecoracion.add(LABEL);
+//        panelDecoracion.setBackground(new Color(70, 130, 180));
+//        pnlSur.add(panelDecoracion, BorderLayout.NORTH);
         
-        JPanel pnlBotones = new JPanel();
-        pnlBotones.setBackground(new Color(70, 130, 180));
-        btnEventos = new JButton("EVENTOS");
-//        btnEventos.setBackground(new Color(0, 128, 128));
+        JPanel panelSurNorte = new JPanel(new GridLayout(5, 2));
+        panelSurNorte.setBackground(Color.white);
+        
+        JPanel panel1 = new JPanel();
+        JLabel label1 = new JLabel( "" );
+        panel1.add(label1);
+        panel1.setBackground(new Color(70, 130, 180));
+        panelSurNorte.add(panel1);
+        
+        JPanel panel2 = new JPanel();
+        JLabel label2 = new JLabel( "" );
+        panel2.add(label2);
+        panel2.setBackground(new Color(70, 130, 180));
+        panelSurNorte.add(panel2);
+        
+        JLabel labelEventos = new JLabel( "Consulta los eventos disponibles en nuestro ZOO" );
+        labelEventos.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        labelEventos.setForeground(new Color(70, 130, 180));
+        panelSurNorte.add(labelEventos);
+        
+        btnEventos = new JButton( "EVENTOS" );
         btnEventos.setFont(new Font("Times New Roman", Font.BOLD, 14));
         btnEventos.setForeground(new Color(70, 130, 180));
-        btnMapa = new JButton("MAPA");
-//        btnMapa.setBackground(new Color(0, 128, 128));
-        btnMapa.setFont(new Font("Times New Roman", Font.BOLD, 14));
-        btnMapa.setForeground(new Color(70, 130, 180));
-		btnInfoAnimales = new JButton("INFORMACIÓN DE ANIMALES");
-//		btnInfoAnimales.setBackground(new Color(0, 128, 128));
-		btnInfoAnimales.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        panelSurNorte.add(btnEventos);
+        
+        JLabel labelMapa = new JLabel( "Aquí puedes conseguir el mapa de nuestro ZOO" );
+        labelMapa.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        labelMapa.setForeground(new Color(70, 130, 180));
+        panelSurNorte.add(labelMapa);
+        
+        JButton botonMapa = new JButton( "MAPA" );
+        botonMapa.addActionListener((e)->{
+			JOptionPane.showMessageDialog(null, "Has seleccionado la opción de Mapa", "MAPA", JOptionPane.INFORMATION_MESSAGE);
+			new VentanaMapa(vActual);
+			vActual.dispose();
+		});
+        botonMapa.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        botonMapa.setForeground(new Color(70, 130, 180));
+        panelSurNorte.add(botonMapa);
+        
+        JLabel labelInfoAnimales = new JLabel( "Toda la información sobre nuestros animales" );
+        labelInfoAnimales.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        labelInfoAnimales.setForeground(new Color(70, 130, 180));
+        panelSurNorte.add(labelInfoAnimales);
+        
+        btnInfoAnimales = new JButton("INFORMACIÓN DE ANIMALES");
+        btnInfoAnimales.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnInfoAnimales.setForeground(new Color(70, 130, 180));
+		panelSurNorte.add(btnInfoAnimales);
+		
+		JLabel labelBillete = new JLabel( "Compra las entradas online" );
+        labelBillete.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        labelBillete.setForeground(new Color(70, 130, 180));
+        panelSurNorte.add(labelBillete);
+        
+        JButton botonImprimirBillete = new JButton( "COMPRAR BILLETE" );
+		botonImprimirBillete.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		botonImprimirBillete.setForeground(new Color(70, 130, 180));
+		panelSurNorte.add(botonImprimirBillete);
+        
+		pnlSur.setLayout(new BorderLayout());
+        pnlSur.add(panelSurNorte, BorderLayout.NORTH);
+        
+        
+        JPanel pnlBotones = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        pnlBotones.setBackground(new Color(70, 130, 180));
+//        btnEventos = new JButton("EVENTOS");
+////        btnEventos.setBackground(new Color(0, 128, 128));
+//        btnEventos.setFont(new Font("Times New Roman", Font.BOLD, 14));
+//        btnEventos.setForeground(new Color(70, 130, 180));
+//        btnMapa = new JButton("MAPA");
+////        btnMapa.setBackground(new Color(0, 128, 128));
+//        btnMapa.setFont(new Font("Times New Roman", Font.BOLD, 14));
+//        btnMapa.setForeground(new Color(70, 130, 180));
+//		btnInfoAnimales = new JButton("INFORMACIÓN DE ANIMALES");
+////		btnInfoAnimales.setBackground(new Color(0, 128, 128));
+//		btnInfoAnimales.setFont(new Font("Times New Roman", Font.BOLD, 14));
+//		btnInfoAnimales.setForeground(new Color(70, 130, 180));
 		btnVolver = new JButton("VOLVER");
 //		btnVolver.setBackground(new Color(0, 128, 128));
 		btnVolver.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnVolver.setForeground(new Color(70, 130, 180));
-		JButton botonImprimirBillete = new JButton( "COMPRAR BILLETE" );
-		botonImprimirBillete.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		botonImprimirBillete.setForeground(new Color(70, 130, 180));
-		pnlBotones.add(btnEventos);
-		pnlBotones.add(btnMapa);
-		pnlBotones.add(btnInfoAnimales);
-		pnlBotones.add(botonImprimirBillete);
-		pnlBotones.add(btnVolver);
-		panelContenidoPrincipal.add(pnlBotones, BorderLayout.SOUTH);
+		
+//		pnlBotones.add(btnEventos);
+//		pnlBotones.add(btnMapa);
+//		pnlBotones.add(btnInfoAnimales);
+//		pnlBotones.add(botonImprimirBillete);
+		pnlBotones.add(btnVolver, BorderLayout.CENTER);
+		pnlSur.add(pnlBotones, BorderLayout.SOUTH);
+		panelContenidoPrincipal.add(pnlSur, BorderLayout.SOUTH);
 		
 		btnEventos.addActionListener((e)->{
 			JOptionPane.showMessageDialog(null, "Has seleccionado la opción de Eventos", "EVENTOS", JOptionPane.INFORMATION_MESSAGE);
@@ -205,11 +286,7 @@ public class VentanaVisitante extends JFrame{
 			vActual.dispose();
 		});
 		
-		btnMapa.addActionListener((e)->{
-			JOptionPane.showMessageDialog(null, "Has seleccionado la opción de Mapa", "MAPA", JOptionPane.INFORMATION_MESSAGE);
-			new VentanaMapa(vActual);
-			vActual.dispose();
-		});
+		
 		
 		btnInfoAnimales.addActionListener((e)->{
 			JOptionPane.showMessageDialog(null, "Has seleccionado la opción de informacion sobre Animales", "ANIMALES", JOptionPane.INFORMATION_MESSAGE);
