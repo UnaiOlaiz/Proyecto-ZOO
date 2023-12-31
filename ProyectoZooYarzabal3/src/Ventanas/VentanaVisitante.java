@@ -155,7 +155,7 @@ public class VentanaVisitante extends JFrame{
         areaTexto.setEditable(false);
         areaTexto.setWrapStyleWord(true);
         areaTexto.setLineWrap(true);
-        Font fuenteLetra = new Font("Times New Roman", Font.BOLD, 13);
+        Font fuenteLetra = new Font("Times New Roman", Font.BOLD, 14);
         areaTexto.setFont(fuenteLetra);
         areaTexto.setForeground(new Color(70, 130, 180));
         
