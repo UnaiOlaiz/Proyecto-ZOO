@@ -181,7 +181,6 @@ public class VentanaSeguridad extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				seguir = false;
-				area.setText("");
 				if(player != null) {
 					area.setForeground(Color.GREEN);
 					area.append("PROBLEMA SOLUCIONADO" + "");
