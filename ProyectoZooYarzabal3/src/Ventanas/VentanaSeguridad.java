@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,10 +26,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
+import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
 public class VentanaSeguridad extends JFrame {
@@ -39,6 +43,7 @@ public class VentanaSeguridad extends JFrame {
 	protected Thread hilo;
 	protected Player player;
 	protected boolean seguir = false;
+	protected JTextArea area;
 	
 	/*
 	 * En esta ventana que se ejecutará tanto al registrar un nuevo trabajador con función de guardia de seguridad, o al 
@@ -58,18 +63,11 @@ public class VentanaSeguridad extends JFrame {
 		setBounds(500, 300, 700, 350);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        /*
-    	 * Para ello, los titulos de los archivos mp3 (los audios) serán almacenados en un array para luego ser seleccionados aleatoriamente.
-    	 * Al ser escocigo será excluido del array para que no se vuelva a repetir.
-    	 */
-    	
-    	titulosAudios = new ArrayList<>();
+        titulosAudios = new ArrayList<>();
     	// Primero rellenemos el array de títulos
-//    	titulosAudios.add("AudioLeon.mp3");
-//    	titulosAudios.add("AudioMono.mp3");
-    	titulosAudios.add("TheoryOfEverything.mp3");
-    	
-    	// El Array ya está lleno, luego cambiaremos los archivos mp3
+    	titulosAudios.add("AudioLeon.mp3");
+    	titulosAudios.add("AudioMono.mp3");
+//    	titulosAudios.add("TheoryOfEverything.mp3");
     	
     	// Panel donde irán las explicaciones de como llevar a cabo el trabajo como guarda de seguridad del ZOO
     	JPanel panelNorte = new JPanel(new GridLayout(4,1));
@@ -120,7 +118,7 @@ public class VentanaSeguridad extends JFrame {
     	botonEmpezarJornada.setFont(new Font("Times New Roman", Font.BOLD, 14));
     	panelBotones.add(botonEmpezarJornada);
     	
-    	JButton botonAcabarJornada = new JButton( "ACABAR JORNADA" );
+    	JButton botonAcabarJornada = new JButton( "SOLUCIONAR PROBLEMA" );
     	botonAcabarJornada.setForeground(new Color(70, 130, 180));
     	botonAcabarJornada.setFont(new Font("Times New Roman", Font.BOLD, 14));
     	panelBotones.add(botonAcabarJornada);
@@ -129,7 +127,7 @@ public class VentanaSeguridad extends JFrame {
     	
     	JPanel panelIntermedio = new JPanel();
     	panelIntermedio.setLayout(new BoxLayout(panelIntermedio, BoxLayout.Y_AXIS));
-    	JTextArea area = new JTextArea( 10, 40 );
+    	area = new JTextArea( 10, 40 );
     	area.setForeground(new Color(70, 130, 180));
     	area.setText("");
     	area.setFont(new Font("Times New Roman", Font.BOLD, 14));
@@ -140,44 +138,42 @@ public class VentanaSeguridad extends JFrame {
     	
     	// actionlistener de los botones
     	botonEmpezarJornada.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String tituloSeleccionado = ElegirArchivoAleatorio(titulosAudios);
-				area.append(tituloSeleccionado + "\n" );
-				
-				hilo = new Thread(() -> {
-		          try {
-		        	botonEmpezarJornada.setEnabled(false);
-					FileInputStream fileInputStream = new FileInputStream(tituloSeleccionado);
-					player = new Player(fileInputStream);
-					seguir = true;
-					player.play();
-					
-					while( seguir && !Thread.currentThread().isInterrupted() ) {
-						try {
-							Thread.sleep(100);
-						}catch (InterruptedException e1) {
-							// TODO: handle exception
-							seguir = false;
-							Thread.currentThread().interrupt();
-						}
-					}
-					player.close();
-				} catch (Exception e1) {
-					System.err.println("Error al reproducir el archivo: " + tituloSeleccionado);
-				    e1.printStackTrace();
-				}
-		        });
-		        
-		        hilo.start(); // Iniciar el hilo
-		        botonEmpezarJornada.setEnabled(true);
-		        
-				
-				
-			
-			}});
+    	    @Override
+    	    public void actionPerformed(ActionEvent e) {
+    	        area.setText("");
+    	        if (titulosAudios.isEmpty()) {
+    	            JOptionPane.showMessageDialog(null, "NO HAY PROBLEMAS QUE SOLUCIONAR");
+    	            return;  // Salir del método si no hay más títulos de audios
+    	        }
+
+    	        String tituloSeleccionado = ElegirArchivoAleatorio(titulosAudios);
+    	        if (tituloSeleccionado == null) {
+    	            System.err.println("El título seleccionado es null");
+    	            return;  // Salir del método si el título seleccionado es null
+    	        }
+
+    	        titulosAudios.remove(tituloSeleccionado);  // Eliminar el título seleccionado de la lista
+
+    	        hilo = new Thread(() -> {
+    	            try {
+    	                botonEmpezarJornada.setEnabled(false);
+    	                FileInputStream fileInputStream = new FileInputStream(tituloSeleccionado);
+    	                // ... (resto del código para reproducir el archivo)
+    	            } catch (FileNotFoundException ex) {
+    	                System.err.println("Archivo no encontrado: " + tituloSeleccionado);
+    	                ex.printStackTrace();
+    	            } catch (Exception ex) {
+    	                System.err.println("Error al reproducir el archivo: " + tituloSeleccionado);
+    	                ex.printStackTrace();
+    	            } finally {
+    	                botonEmpezarJornada.setEnabled(true);
+    	            }
+    	        });
+
+    	        hilo.start();  // Iniciar el hilo
+    	    }
+    	});
+
     	
     	botonAcabarJornada.addActionListener(new ActionListener() {
 			
@@ -185,7 +181,16 @@ public class VentanaSeguridad extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				seguir = false;
+				area.setText("");
 				if(player != null) {
+					area.setForeground(Color.GREEN);
+					area.append("PROBLEMA SOLUCIONADO" + "");
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					player.close();
 					hilo.interrupt();
 					botonEmpezarJornada.setEnabled(true);
@@ -216,24 +221,52 @@ public class VentanaSeguridad extends JFrame {
 	 * Seguramente sea implentado en algún tipo de hilo.
 	 */
 	
-	public String ElegirArchivoAleatorio(ArrayList<String> arrayTitulos) {
-		Random random = new Random();
-		int indiceAleatorio = random.nextInt(arrayTitulos.size());
-		String tituloAleatorio = arrayTitulos.get(indiceAleatorio);
-//		System.out.println(tituloAleatorio);
-		
-		return tituloAleatorio;
-		
+	public String ElegirArchivoAleatorio(ArrayList<String> arrayList) {
+	    if (!arrayList.isEmpty()) {
+	        Random random = new Random();
+	        int indiceAleatorio = random.nextInt(arrayList.size());
+	        
+	        String tituloAleatorio = arrayList.get(indiceAleatorio);
+	        
+	        if (tituloAleatorio != null) {
+	            switch (tituloAleatorio) {
+	                case "AudioLeon.mp3":
+	                    JOptionPane.showMessageDialog(null, "¡ALERTA CÓDIGO 14!", "Alerta", JOptionPane.WARNING_MESSAGE);
+	                    area.setForeground(Color.RED);
+	                    area.append("ALERTA CÓDIGO 14" + "\n" + "VISITANTE EN APUROS, SE REQUIERE AYUDA INMEDIATA" + "\n");
+	                    break;
+	                case "AudioMono.mp3":
+	                    area.setForeground(Color.RED);
+	                    JOptionPane.showMessageDialog(null, "¡ALERTA CÓDIGO 12!", "Alerta", JOptionPane.WARNING_MESSAGE);
+	                    area.append("ALERTA CÓDIGO 12" + "\n" + "ANIMAL SE HA ESCAPADO, SUELTO POR EL ZOO" + "\n");
+	                    break;
+	                default:
+	                    break;
+	            }
+	            return tituloAleatorio;
+	        } else {
+	            System.err.println("El título aleatorio es null");
+	        }
+	    } else {
+	        System.err.println("El array está ya vacío");
+	        JOptionPane.showMessageDialog(null, "NO HAY PROBLEMAS QUE SOLUCIONAR");
+	    }
+	    return null;
 	}
+
 	
-	public void ReproducirAudioMp3(String nombreArchivo) {
-		try {
-			FileInputStream fileInputStream = new FileInputStream(nombreArchivo);
-			Player player = new Player(fileInputStream);
-			player.play();
-		}catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+	public void ReproducirAudioMp3(String nombreArchivo) throws JavaLayerException {
+		if (nombreArchivo != null) {
+			try {
+				FileInputStream fileInputStream = new FileInputStream(nombreArchivo);
+				Player player = new Player(fileInputStream);
+				player.play();
+			}catch (FileNotFoundException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		} else {
+			System.err.println("Error al recibir el nombre del archivo");
 		}
 	}
 	
