@@ -65,10 +65,10 @@ public class VentanaSeguridad extends JFrame {
     	
     	titulosAudios = new ArrayList<>();
     	// Primero rellenemos el array de títulos
+//    	titulosAudios.add("AudioLeon.mp3");
+//    	titulosAudios.add("AudioMono.mp3");
     	titulosAudios.add("TheoryOfEverything.mp3");
-    	titulosAudios.add("The7Seas.mp3");
-    	titulosAudios.add("TimeMachine.mp3");
-    	titulosAudios.add("VikingArena.mp3");
+    	
     	// El Array ya está lleno, luego cambiaremos los archivos mp3
     	
     	// Panel donde irán las explicaciones de como llevar a cabo el trabajo como guarda de seguridad del ZOO
@@ -115,7 +115,7 @@ public class VentanaSeguridad extends JFrame {
     	
     	JPanel panelBotones = new JPanel(new FlowLayout());
         panelBotones.setBackground(new Color(70, 130, 180));
-    	JButton botonEmpezarJornada = new JButton( "COMENZAR JORNADA" );
+    	JButton botonEmpezarJornada = new JButton( "ATENDER PROBLEMAS" );
     	botonEmpezarJornada.setForeground(new Color(70, 130, 180));
     	botonEmpezarJornada.setFont(new Font("Times New Roman", Font.BOLD, 14));
     	panelBotones.add(botonEmpezarJornada);
@@ -149,22 +149,31 @@ public class VentanaSeguridad extends JFrame {
 				
 				hilo = new Thread(() -> {
 		          try {
+		        	botonEmpezarJornada.setEnabled(false);
 					FileInputStream fileInputStream = new FileInputStream(tituloSeleccionado);
 					player = new Player(fileInputStream);
 					seguir = true;
 					player.play();
 					
 					while( seguir && !Thread.currentThread().isInterrupted() ) {
-						Thread.sleep(100);
+						try {
+							Thread.sleep(100);
+						}catch (InterruptedException e1) {
+							// TODO: handle exception
+							seguir = false;
+							Thread.currentThread().interrupt();
+						}
 					}
 					player.close();
 				} catch (Exception e1) {
-					// TODO: handle exception
-					e1.printStackTrace();
+					System.err.println("Error al reproducir el archivo: " + tituloSeleccionado);
+				    e1.printStackTrace();
 				}
 		        });
 		        
 		        hilo.start(); // Iniciar el hilo
+		        botonEmpezarJornada.setEnabled(true);
+		        
 				
 				
 			
@@ -179,6 +188,7 @@ public class VentanaSeguridad extends JFrame {
 				if(player != null) {
 					player.close();
 					hilo.interrupt();
+					botonEmpezarJornada.setEnabled(true);
 				}
 			}
 		});
@@ -211,6 +221,7 @@ public class VentanaSeguridad extends JFrame {
 		int indiceAleatorio = random.nextInt(arrayTitulos.size());
 		String tituloAleatorio = arrayTitulos.get(indiceAleatorio);
 //		System.out.println(tituloAleatorio);
+		
 		return tituloAleatorio;
 		
 	}
