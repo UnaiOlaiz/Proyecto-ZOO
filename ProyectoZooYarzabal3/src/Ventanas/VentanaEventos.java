@@ -26,10 +26,10 @@ public class VentanaEventos extends JFrame{
 	private JPanel pSur;
 	// private EmbeddedMediaPlayerComponent component;
 	
-	public VentanaEventos () { //JFrame va
+	public VentanaEventos (JFrame va) { //JFrame va
 		super();
 		vActual = this;
-//		vAnterior = va;
+		vAnterior = va;
 		setResizable(false);
 		setBounds(500, 300, 800, 600);
 		setTitle( "INFORMACIÓN SOBRE NUESTROS EVENTOS" );
@@ -241,9 +241,9 @@ public class VentanaEventos extends JFrame{
 		// component.mediaPlayer().audio().setVolume(75);
 		// component.mediaPlayer().media().play(urlVideo);
 	}
-	public static void main(String[] args) {
-		new VentanaEventos();
-	}
+//	public static void main(String[] args) {
+//		new VentanaEventos();
+//	}
 	
 	
 } 

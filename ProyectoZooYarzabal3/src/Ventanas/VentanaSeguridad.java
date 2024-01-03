@@ -54,10 +54,10 @@ public class VentanaSeguridad extends JFrame {
 	 * posible las órdenes y mensajes que recibe uno en la vida real.
 	 */
 	
-	public VentanaSeguridad() { // Luego aquí insertar JFrame va
+	public VentanaSeguridad(JFrame va) { // Luego aquí insertar JFrame va
 		super();
 		vActual = this;
-//		vAnterior = va;
+		vAnterior = va;
 		setTitle("Ventana de Seguridad");
 		setResizable(true);
 		setLocationRelativeTo(null);
@@ -346,8 +346,6 @@ public class VentanaSeguridad extends JFrame {
 	
 	
 	
-	public static void main(String[] args) {
-		new VentanaSeguridad();
-	}
+	
 
 }
