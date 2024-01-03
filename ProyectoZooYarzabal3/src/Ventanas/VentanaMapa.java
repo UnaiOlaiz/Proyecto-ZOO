@@ -17,6 +17,7 @@ public class VentanaMapa extends JFrame {
         vActual = this;
         vAnterior = va;
         setSize(825, 545);
+        setResizable(false);
         setTitle( "MAPA DEL ZOO" );
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
