@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-01-12T18:43:51.435206100Z</date>
+  <millis>1705085031435</millis>
+  <nanos>206100</nanos>
+  <sequence>0</sequence>
+  <logger>Logger BD</logger>
+  <level>INFO</level>
+  <class>BaseDeDatos.ConexionABaseDeDatos</class>
+  <method>abrirConexion</method>
+  <thread>1</thread>
+  <message>Conexión establecida a BD</message>
+</record>
+<record>
+  <date>2024-01-12T18:43:51.469875400Z</date>
+  <millis>1705085031469</millis>
+  <nanos>875400</nanos>
+  <sequence>1</sequence>
+  <logger>Logger BD</logger>
+  <level>WARNING</level>
+  <class>BaseDeDatos.ConexionABaseDeDatos</class>
+  <method>abrirConexion</method>
+  <thread>1</thread>
+  <message>Error al crear las tablas, anteriormente creadas</message>
+</record>
+<record>
+  <date>2024-01-12T18:43:51.470873600Z</date>
+  <millis>1705085031470</millis>
+  <nanos>873600</nanos>
+  <sequence>2</sequence>
+  <logger>Logger BD</logger>
+  <level>WARNING</level>
+  <class>BaseDeDatos.ConexionABaseDeDatos</class>
+  <method>abrirConexion</method>
+  <thread>1</thread>
+  <message>Error en la introducción de datos a las tablas, ya estaban anteriormente creadas</message>
+</record>
+<record>
+  <date>2024-01-12T18:43:51.471877500Z</date>
+  <millis>1705085031471</millis>
+  <nanos>877500</nanos>
+  <sequence>3</sequence>
+  <logger>Logger BD</logger>
+  <level>INFO</level>
+  <class>BaseDeDatos.ConexionABaseDeDatos</class>
+  <method>cerramosConexion</method>
+  <thread>1</thread>
+  <message>Conexión a BD cerrada correctamente</message>
+</record>
+</log>

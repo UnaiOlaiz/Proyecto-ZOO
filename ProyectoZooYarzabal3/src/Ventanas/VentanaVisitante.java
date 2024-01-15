@@ -50,95 +50,19 @@ public class VentanaVisitante extends JFrame{
 		
 		JPanel pnlTitulo = new JPanel();
 		pnlTitulo.setBackground(new Color(70, 130, 180));
-//		pnlTitulo.setBackground(new Color(173, 217, 230));
 		pnlTitulo.setLayout(new FlowLayout(FlowLayout.CENTER));
         JLabel lblTitulo = new JLabel( "BIENVENIDO A ZOOYARZABAL" );
         lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 40));
         lblTitulo.setForeground(Color.white);
         pnlTitulo.add(lblTitulo);
-        pnlTitulo.setPreferredSize(new Dimension(pnlTitulo.getPreferredSize().width, 50));
         panelContenidoPrincipal.add(pnlTitulo, BorderLayout.NORTH);
-        
-        /*
-         * Vamos a meter el video dentro de un panel y toda la ventana será controlada
-         * por un JScrollPane, el video será sacado de Youtube, ya que no contamos con
-         * los recursos para hacer uno nosotros mismos.
-         */
+
         JPanel pnlSur = new JPanel();
         JPanel panelPrincipal = new JPanel(new BorderLayout());
-//      panelPrincipal.setBackground(new Color(173, 217, 230));
-        
-        JPanel panelVideoyBotones = new JPanel(new BorderLayout());
-        panelVideoyBotones.setBackground(new Color(70, 130, 180));
-        
-        
-//      component = new EmbeddedMediaPlayerComponent(); 
-        JPanel componenteVacio = new JPanel();
-        componenteVacio.setBackground(Color.BLACK);
-        panelVideoyBotones.add(componenteVacio, BorderLayout.CENTER);
-        panelPrincipal.add(panelVideoyBotones, BorderLayout.CENTER);
-        
-        JPanel panelBotonesVideo = new JPanel(new FlowLayout());
-        panelBotonesVideo.setBackground(new Color(173, 217, 230));
-        JButton botonPausa = new JButton( "Pausar" );
-//      botonPausa.setBackground(new Color(0, 128, 128));
-        botonPausa.setFont(new Font("Times New Roman", Font.BOLD, 14));
-        botonPausa.setForeground(new Color(70, 130, 180));
-        panelBotonesVideo.add(botonPausa);
-        JButton botonReiniciar = new JButton( "Reiniciar" );
-//      botonReiniciar.setBackground(new Color(0, 128, 128));
-        botonReiniciar.setFont(new Font("Times New Roman", Font.BOLD, 14));
-        botonReiniciar.setForeground(new Color(70, 130, 180));
-        panelBotonesVideo.add(botonReiniciar);
-        panelBotonesVideo.setBackground(new Color(70, 130, 180));
-        
-/*        botonPausa.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				if (component.mediaPlayer().status().isPlaying()) {
-					component.mediaPlayer().controls().pause();
-				}else {
-					component.mediaPlayer().controls().play();
-				}
-			}
-		});			
-		
-		
-        
-        botonReiniciar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				component.mediaPlayer().controls().pause();
-				component.mediaPlayer().controls().setTime(0);
-				component.mediaPlayer().controls().play();
-			}
-		});
-		
-		*/
-        
-        panelVideoyBotones.add(panelBotonesVideo, BorderLayout.SOUTH);
-        
-        //
-		
-        JPanel pnlTexto = new JPanel(new GridBagLayout());
-        // Agregaremos algunas condiciones para que luego el JTextArea se vea mejor
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0; 
-        gbc.gridy = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.gridheight = 1; 
-        gbc.weightx = 1.0; 
-        gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
         
         
         JTextArea areaTexto = new JTextArea();
         areaTexto.setOpaque(false);
-        // areaTexto.setBackground(new Color(173, 217, 230));
         areaTexto.setRows(10);
         areaTexto.setColumns(30);
         areaTexto.setText(
@@ -155,39 +79,20 @@ public class VentanaVisitante extends JFrame{
         areaTexto.setEditable(false);
         areaTexto.setWrapStyleWord(true);
         areaTexto.setLineWrap(true);
-        Font fuenteLetra = new Font("Times New Roman", Font.BOLD, 14);
+        Font fuenteLetra = new Font("Times New Roman", Font.BOLD, 17);
         areaTexto.setFont(fuenteLetra);
         areaTexto.setForeground(new Color(70, 130, 180));
         
         JPanel imagePanel = new JPanel();
         imagePanel.setLayout(new BorderLayout());
         imagePanel.setBackground(Color.WHITE);
-        imagePanel.add(areaTexto, BorderLayout.CENTER);
+        imagePanel.add(areaTexto, BorderLayout.NORTH);
         
         
-        panelPrincipal.add(imagePanel, BorderLayout.SOUTH);
+        panelPrincipal.add(imagePanel);
         panelPrincipal.setBackground(new Color(173, 217, 230));
         panelContenidoPrincipal.add(panelPrincipal, BorderLayout.CENTER);
         
-        //
-//        JPanel pnlTitulo = new JPanel();
-//		pnlTitulo.setBackground(new Color(70, 130, 180));
-////		pnlTitulo.setBackground(new Color(173, 217, 230));
-//		pnlTitulo.setLayout(new FlowLayout(FlowLayout.CENTER));
-//        JLabel lblTitulo = new JLabel( "BIENVENIDO A ZOOYARZABAL" );
-//        lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 40));
-//        lblTitulo.setForeground(Color.white);
-//        pnlTitulo.add(lblTitulo);
-//        pnlTitulo.setPreferredSize(new Dimension(pnlTitulo.getPreferredSize().width, 50));
-//        panelContenidoPrincipal.add(pnlTitulo, BorderLayout.NORTH);
-//        JPanel panelDecoracion = new JPanel();
-//        panelDecoracion.setLayout(new FlowLayout(FlowLayout.CENTER));
-//        JLabel LABEL = new JLabel( "MÁS INFORMACIÓN" );
-//        LABEL.setFont(new Font("Times New Roman", Font.BOLD, 18));
-//        LABEL.setForeground(Color.white);
-//        panelDecoracion.add(LABEL);
-//        panelDecoracion.setBackground(new Color(70, 130, 180));
-//        pnlSur.add(panelDecoracion, BorderLayout.NORTH);
         
         JPanel panelSurNorte = new JPanel(new GridLayout(5, 2));
         panelSurNorte.setBackground(Color.white);
@@ -205,21 +110,22 @@ public class VentanaVisitante extends JFrame{
         panelSurNorte.add(panel2);
         
         JLabel labelEventos = new JLabel( "Consulta los eventos disponibles en nuestro ZOO" );
-        labelEventos.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        labelEventos.setFont(new Font("Times New Roman", Font.BOLD, 17));
         labelEventos.setForeground(new Color(70, 130, 180));
         panelSurNorte.add(labelEventos);
         
         btnEventos = new JButton( "EVENTOS" );
-        btnEventos.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        btnEventos.setFont(new Font("Times New Roman", Font.BOLD, 17));
         btnEventos.setForeground(new Color(70, 130, 180));
         panelSurNorte.add(btnEventos);
         
         JLabel labelMapa = new JLabel( "Aquí puedes conseguir el mapa de nuestro ZOO" );
-        labelMapa.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        labelMapa.setFont(new Font("Times New Roman", Font.BOLD, 17));
         labelMapa.setForeground(new Color(70, 130, 180));
         panelSurNorte.add(labelMapa);
         
         JButton botonMapa = new JButton( "MAPA" );
+        botonMapa.setFont(new Font("Times New Roman", Font.BOLD, 17));
         botonMapa.addActionListener((e)->{
 			JOptionPane.showMessageDialog(null, "Has seleccionado la opción de Mapa", "MAPA", JOptionPane.INFORMATION_MESSAGE);
 			new VentanaMapa(vActual);
@@ -229,23 +135,23 @@ public class VentanaVisitante extends JFrame{
         botonMapa.setForeground(new Color(70, 130, 180));
         panelSurNorte.add(botonMapa);
         
-        JLabel labelInfoAnimales = new JLabel( "Toda la información sobre nuestros animales" );
-        labelInfoAnimales.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        JLabel labelInfoAnimales = new JLabel( "Mira el vídeo de bienvenida" );
+        labelInfoAnimales.setFont(new Font("Times New Roman", Font.BOLD, 17));
         labelInfoAnimales.setForeground(new Color(70, 130, 180));
         panelSurNorte.add(labelInfoAnimales);
         
-        btnInfoAnimales = new JButton("INFORMACIÓN DE ANIMALES");
-        btnInfoAnimales.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        btnInfoAnimales = new JButton("LINK VÍDEO");
+        btnInfoAnimales.setFont(new Font("Times New Roman", Font.BOLD, 17));
 		btnInfoAnimales.setForeground(new Color(70, 130, 180));
 		panelSurNorte.add(btnInfoAnimales);
 		
 		JLabel labelBillete = new JLabel( "Compra las entradas online" );
-        labelBillete.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        labelBillete.setFont(new Font("Times New Roman", Font.BOLD, 17));
         labelBillete.setForeground(new Color(70, 130, 180));
         panelSurNorte.add(labelBillete);
         
         JButton botonImprimirBillete = new JButton( "COMPRAR BILLETE" );
-		botonImprimirBillete.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		botonImprimirBillete.setFont(new Font("Times New Roman", Font.BOLD, 17));
 		botonImprimirBillete.setForeground(new Color(70, 130, 180));
 		panelSurNorte.add(botonImprimirBillete);
         
@@ -289,8 +195,9 @@ public class VentanaVisitante extends JFrame{
 		
 		
 		btnInfoAnimales.addActionListener((e)->{
-			JOptionPane.showMessageDialog(null, "Has seleccionado la opción de informacion sobre Animales", "ANIMALES", JOptionPane.INFORMATION_MESSAGE);
-			new VentanaAnimales(vActual);
+			JOptionPane.showMessageDialog(null, "Has seleccionado la opción de reproducción del vídeo", "VÍDEO", JOptionPane.INFORMATION_MESSAGE);
+//			new VentanaAnimales(vActual);
+			new VentanaVideo(vActual);
 			vActual.dispose();
 		});
 		

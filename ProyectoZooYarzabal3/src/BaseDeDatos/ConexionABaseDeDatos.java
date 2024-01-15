@@ -7,6 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+
+import org.slf4j.Logger;
 
 import Zoo.Empleado;
 import Zoo.Trabajador;
@@ -14,16 +18,22 @@ import Zoo.Trabajador;
 public class ConexionABaseDeDatos {
 
 	private static Connection conexion;
+	private static java.util.logging.Logger logger;
 	
 	public static Connection abrirConexion() {
 		try {
+			logger = java.util.logging.Logger.getLogger("Logger BD");
+			logger.addHandler(new FileHandler("LoggerZOOYARZABAL.xml"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
 			Class.forName("org.sqlite.JDBC");
 			conexion = DriverManager.getConnection("jdbc:sqlite:ZOOYARZABALBD.db");
-			System.out.println( "Conectado a la base de datos!" );
+			logger.log(Level.INFO, "Conexión establecida a BD");
 			
 			try {
 				// Vamos a crear la base de datos desde 0
-				System.out.println( "Creando tablas de la base de datos... " );
 				Statement statement = conexion.createStatement();
 				String sent = "CREATE TABLE Habitats (id_habitat INTEGER PRIMARY KEY, nombre TEXT NOT NULL, tipo TEXT);";
 				statement.executeUpdate( sent );
@@ -35,11 +45,10 @@ public class ConexionABaseDeDatos {
 				statement.executeUpdate( sent );
 				sent = "CREATE TABLE Exhibiciones (id_exhibicion INTEGER PRIMARY KEY, nombre TEXT NOT NULL, descripcion TEXT, id_animal INTEGER, CONSTRAINT fk_animal FOREIGN KEY (id_animal) REFERENCES Animales(id_animal));";
 				statement.executeUpdate( sent );
-				System.out.println( "Tablas creadas correcatamente" );
+				logger.log(Level.INFO, "Tablas de la BD creadas correctamente");
 				// Tablas ya creadas
 			} catch (SQLException e) {
-				// TODO: handle exception
-				System.err.println( "Tablas anteriormente creadas" );
+				logger.log(Level.WARNING, "Error al crear las tablas, anteriormente creadas");
 			}
 			
 			try {
@@ -57,8 +66,6 @@ public class ConexionABaseDeDatos {
 						+ "(90, 'Montaña', 'Frío');";
 				Statement statement = conexion.createStatement();
 				statement.execute( sent );
-				
-				// CURIOSAMENTE FUNCIONA HASTA AQUÍ LUEGO SALTA EL ERROR DE SQLITE_BUSY
 				
 				sent = "INSERT INTO Animales (id_animal, nombre, especie, fecha_nacimiento, genero, habitat) VALUES\r\n"
 				        + "(1, 'León', 'Panthera leo', '2010-05-15', 'Macho', 'Savannah'),\r\n"
@@ -133,15 +140,13 @@ public class ConexionABaseDeDatos {
 						+ "";
 				statement.executeUpdate( sent );
 				
-				System.out.println( "Datos introducidos correctamente" );
+				logger.log(Level.INFO, "Valores introducidos correctamente");
 			} catch (SQLException e) {
-				// TODO: handle exception
-				System.err.println( "Datos anteriormente introducidos" );
+				logger.log(Level.WARNING, "Error en la introducción de datos a las tablas, ya estaban anteriormente creadas");
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println( e + "" );
+			logger.log(Level.SEVERE, "Error en la creación e inserción de datos de la BD");
 		}
 		return conexion;
 	}
@@ -152,9 +157,9 @@ public class ConexionABaseDeDatos {
 	public static void cerramosConexion() {
 		try {
 			conexion.close();
-			System.out.println( "Conexión cerrada con éxito! ");
+			logger.log(Level.INFO, "Conexión a BD cerrada correctamente");
 		}catch (SQLException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "No se ha podido cerrar correctamente la conexión a la BD");
 		}
 	}
 }

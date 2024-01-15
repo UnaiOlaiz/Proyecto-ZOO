@@ -8,7 +8,7 @@ public class MainBD {
 		// VisualizarBD.visualizarHabitats();
 		// VisualizarBD.visualizarAnimales();
 		// VisualizarBD.visualizarVisitantes();
-		 VisualizarBD.visualizarExhibiciones();
+//		 VisualizarBD.visualizarExhibiciones();
 		ConexionABaseDeDatos.cerramosConexion();
 	}
 }
