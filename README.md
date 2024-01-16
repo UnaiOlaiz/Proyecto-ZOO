@@ -89,3 +89,4 @@ unaio
 4
 unaio
 
+A partir de aquí nos basaremos en los commits que salen en el historial de este repositorio.
