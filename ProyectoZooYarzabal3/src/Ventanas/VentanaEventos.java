@@ -8,6 +8,12 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +23,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 
 // import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 
@@ -24,6 +34,7 @@ public class VentanaEventos extends JFrame{
 	private JFrame vActual, vAnterior;
 	private JButton btnVolver;
 	private JPanel pSur;
+	private EmbeddedMediaPlayerComponent video1, video2, video3, video4, video5;
 	// private EmbeddedMediaPlayerComponent component;
 	
 	public VentanaEventos (JFrame va) { //JFrame va
@@ -56,12 +67,28 @@ public class VentanaEventos extends JFrame{
 		labelTitulo.setForeground(Color.white);
 		labelTitulo.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		panelEvento1.add(labelTitulo, BorderLayout.NORTH);
-		JPanel panelVideo = new JPanel();
-		panelVideo.setBackground(Color.black);
-		panelEvento1.add(panelVideo, BorderLayout.CENTER); 
 		
+		video1 = new EmbeddedMediaPlayerComponent();
+		panelEvento1.add(video1, BorderLayout.CENTER);
+		panelEvento1.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+					if (video1.mediaPlayer().status().isPlaying()) {
+						video1.mediaPlayer().controls().pause();
+						System.out.println("Vídeo pausado");
+					} else {
+						video1.mediaPlayer().controls().play();
+						System.out.println("Vídeo reanudado");
+					}
+				}
+			}
+		});
 		
 		JTextArea area = new JTextArea();
+		area.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		area.setForeground(new Color(70, 130, 180));
 		area.setEditable(false);
 		area.setLineWrap(true);
 		area.setWrapStyleWord(true);
@@ -75,7 +102,7 @@ public class VentanaEventos extends JFrame{
                 "Sesión 2: 17-01-2024 - 10:00 \n\n" +
                 "Entradas:\n" +
                 "Adquiere tus entradas ahora y asegura tu lugar para este espectáculo único. ¡No te pierdas la oportunidad de sumergirte en la magia del océano en vivo!");
-		
+		area.setCaretPosition(0);
 		panelEvento1.add(new JScrollPane(area)); 
 		
 		JPanel panelEvento2 = new JPanel(new GridLayout(3,1));
@@ -88,12 +115,18 @@ public class VentanaEventos extends JFrame{
 		labelTitulo2.setForeground(Color.white);
 		labelTitulo2.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		panelEvento2.add(labelTitulo2, BorderLayout.NORTH);
-		JPanel panelVideo2 = new JPanel();
-		panelVideo2.setBackground(Color.black);
-		panelEvento2.add(panelVideo2, BorderLayout.CENTER);
+		
+//		JPanel panelVideo2 = new JPanel();
+//		panelVideo2.setBackground(Color.black);
+//		panelEvento2.add(panelVideo2, BorderLayout.CENTER);
+		
+		video2 = new EmbeddedMediaPlayerComponent();
+		panelEvento2.add(video2, BorderLayout.CENTER);
 		
 		
 		JTextArea area2 = new JTextArea();
+		area2.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		area2.setForeground(new Color(70, 130, 180));
 		area2.setEditable(false);
 		area2.setLineWrap(true);
 		area2.setWrapStyleWord(true);
@@ -109,7 +142,7 @@ public class VentanaEventos extends JFrame{
                 "Adquiere tus entradas ahora y asegura tu lugar para este espectáculo único. ¡No te pierdas la oportunidad de presenciar la grandeza de los leones en vivo!\n\n" +
                 "Información de Contacto:\n" +
                 "¡Únete a nosotros para un día inolvidable lleno de gracia, poder y asombro en el increíble espectáculo de leones!");
-		
+		area2.setCaretPosition(0);
 		panelEvento2.add(new JScrollPane(area2));
 		
 		
@@ -123,11 +156,17 @@ public class VentanaEventos extends JFrame{
 		labelTitulo3.setForeground(Color.white);
 		labelTitulo3.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		panelEvento3.add(labelTitulo3, BorderLayout.NORTH);
-		JPanel panelVideo3 = new JPanel();
-		panelVideo3.setBackground(Color.black);
-		panelEvento3.add(panelVideo3, BorderLayout.CENTER);
+		
+//		JPanel panelVideo3 = new JPanel();
+//		panelVideo3.setBackground(Color.black);
+//		panelEvento3.add(panelVideo3, BorderLayout.CENTER);
+		
+		video3 = new EmbeddedMediaPlayerComponent();
+		panelEvento3.add(video3, BorderLayout.CENTER);
 		
 		JTextArea area3 = new JTextArea();
+		area3.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		area3.setForeground(new Color(70, 130, 180));
 		area3.setEditable(false);
 		area3.setLineWrap(true);
 		area3.setWrapStyleWord(true);
@@ -143,8 +182,8 @@ public class VentanaEventos extends JFrame{
                 "Adquiere tus entradas ahora y asegura tu lugar para este espectáculo polar único. ¡No te pierdas la oportunidad de sumergirte en la maravilla del Ártico en vivo!\n\n" +
                 "¡Únete a nosotros para un día inolvidable lleno de aventura polar, conocimiento y asombro en el espectáculo del Zoológico Frígido!");
 			
-			
-			panelEvento3.add(new JScrollPane(area3));
+		area3.setCaretPosition(0);
+		panelEvento3.add(new JScrollPane(area3));
 		
 		JPanel panelEvento4 = new JPanel(new GridLayout(3,1));
 		panelEvento4.setBackground(new Color(70, 130, 180));
@@ -156,11 +195,17 @@ public class VentanaEventos extends JFrame{
 		labelTitulo4.setForeground(Color.white);
 		labelTitulo4.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		panelEvento4.add(labelTitulo4, BorderLayout.NORTH);
-		JPanel panelVideo4 = new JPanel();
-		panelVideo4.setBackground(Color.black);
-		panelEvento4.add(panelVideo4, BorderLayout.CENTER);
+		
+//		JPanel panelVideo4 = new JPanel();
+//		panelVideo4.setBackground(Color.black);
+//		panelEvento4.add(panelVideo4, BorderLayout.CENTER);
+		
+		video4 = new EmbeddedMediaPlayerComponent();
+		panelEvento4.add(video4, BorderLayout.CENTER);
 		
 		JTextArea area4 = new JTextArea();
+		area4.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		area4.setForeground(new Color(70, 130, 180));
 		area4.setEditable(false);
 		area4.setLineWrap(true);
 		area4.setWrapStyleWord(true);
@@ -178,8 +223,8 @@ public class VentanaEventos extends JFrame{
                 "Adquiere tus entradas ahora y asegura tu lugar para este espectáculo único en el Zoológico Salvaje. ¡No te pierdas la oportunidad de sumergirte en la majestuosidad del hábitat del tigre en vivo!\n\n" +
                 "¡Únete a nosotros para un día inolvidable lleno de maravilla, conocimiento y asombro en el espectáculo \"El Hábitat del Tigre\" del Zoológico Salvaje!");
 			
-			
-			panelEvento4.add(new JScrollPane(area4));
+		area4.setCaretPosition(0);	
+		panelEvento4.add(new JScrollPane(area4));
 		
 		JPanel panelEvento5 = new JPanel(new GridLayout(3,1));
 		panelEvento5.setBackground(new Color(70, 130, 180));
@@ -191,11 +236,17 @@ public class VentanaEventos extends JFrame{
 		labelTitulo5.setForeground(Color.white);
 		labelTitulo5.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		panelEvento5.add(labelTitulo5, BorderLayout.NORTH);
-		JPanel panelVideo5 = new JPanel();
-		panelVideo5.setBackground(Color.black);
-		panelEvento5.add(panelVideo5, BorderLayout.CENTER);
+		
+//		JPanel panelVideo5 = new JPanel();
+//		panelVideo5.setBackground(Color.black);
+//		panelEvento5.add(panelVideo5, BorderLayout.CENTER);
+		
+		video5 = new EmbeddedMediaPlayerComponent();
+		panelEvento5.add(video5, BorderLayout.CENTER);
 		
 		JTextArea area5 = new JTextArea();
+		area5.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		area5.setForeground(new Color(70, 130, 180));
 		area5.setEditable(false);
 		area5.setLineWrap(true);
 		area5.setWrapStyleWord(true);
@@ -210,7 +261,8 @@ public class VentanaEventos extends JFrame{
                 "Entradas:\n" +
                 "Adquiere tus entradas ahora y asegura tu lugar para este espectáculo único en el Zoológico Oceanográfico. ¡No te pierdas la oportunidad de ser testigo de las \"Tortugas en Acción\" en vivo!\n\n" +
                 "¡Únete a nosotros para un día inolvidable lleno de maravillas acuáticas, aprendizaje y asombro en el espectáculo de \"Tortugas en Acción\" del Zoológico Oceanográfico!");
-			
+		
+		area5.setCaretPosition(0);
 		panelEvento5.add(new JScrollPane(area5));
 		
 		tabbedPane.addTab("Mundo Marino", panelEvento1);
@@ -219,8 +271,24 @@ public class VentanaEventos extends JFrame{
 		tabbedPane.addTab("Hábitat del tigre", panelEvento4);
 		tabbedPane.addTab("Tortugas en acción", panelEvento5);
 		
-		
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		
+		/*
+		 * Como voy a trabajar con paneles diferentes dentro de un tabbed pain con cada panel teniendo su vídeo
+		 * propio, voy a hacer que al cambiar de panel se reproduzca el vídeo del panel correspondiente
+		 * y se pare el anterior. Como defecto, se iniciará ejecutando el vídeo del panel1.
+		 */
+		
+		tabbedPane.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				int panelSeleccionado = tabbedPane.getSelectedIndex();
+				// Vamos a trabajar con funciones para que resulte más cómodo
+				detenerVideoAnterior(panelSeleccionado);
+				reproducirVideoActual(panelSeleccionado);
+			}
+		});
 				
 		btnVolver = new JButton("VOLVER");
 		btnVolver.setForeground(new Color(70, 130, 180));
@@ -234,17 +302,87 @@ public class VentanaEventos extends JFrame{
 			vActual.dispose();
 		});
 		
+		// Los vídeos sólo se reproducían al haber cambiado de pestaña, pero al inicializar la ventana no se ejecutaba en el primaer panel
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				reproducirVideoActual(0);
+			}
+		});
+		
+		video1.setPreferredSize(new Dimension(600, 400));
+		
 		setVisible(true);
 	}
-	//Informacion de todos los eventos del zoo 
-	public void lanzarVideo (String urlVideo) {
-		// component.mediaPlayer().audio().setVolume(75);
-		// component.mediaPlayer().media().play(urlVideo);
-	}
-//	public static void main(String[] args) {
-//		new VentanaEventos();
-//	}
+
+	protected void reproducirVideoActual(int panelSeleccionado) {
+        String videoPath = "C:\\Users\\unaio\\Downloads\\DjMaRiiO _ Strip Fifa #2 _ Xf.3gp";  
+        switch (panelSeleccionado) {
+            case 0:
+                lanza(video1, videoPath);
+                break;
+            case 1:
+                lanza(video2, videoPath);
+                break;
+            case 2:
+                lanza(video3, videoPath);
+                break;
+            case 3:
+                lanza(video4, videoPath);
+                break;
+            case 4:
+                lanza(video5, videoPath);
+                break;
+        }
+    }
+
+    protected void detenerVideoAnterior(int panelSeleccionado) {
+        switch (panelSeleccionado) {
+            case 0:
+                detener(video2);
+                detener(video3);
+                detener(video4);
+                detener(video5);
+                break;
+            case 1:
+                detener(video1);
+                detener(video3);
+                detener(video4);
+                detener(video5);
+                break;
+            case 2:
+                detener(video1);
+                detener(video2);
+                detener(video4);
+                detener(video5);
+                break;
+            case 3:
+                detener(video1);
+                detener(video2);
+                detener(video3);
+                detener(video5);
+                break;
+            case 4:
+                detener(video1);
+                detener(video2);
+                detener(video3);
+                detener(video4);
+                break;
+        }
+    }
+
+    private void lanza(EmbeddedMediaPlayerComponent component, String videoPath) {
+        component.mediaPlayer().audio().setVolume(100);
+        component.mediaPlayer().media().prepare(videoPath);
+        component.mediaPlayer().controls().play();
+    }
+
+    private void detener(EmbeddedMediaPlayerComponent component) {
+        component.mediaPlayer().controls().stop();
+    }
 	
+    
 	
 } 
 

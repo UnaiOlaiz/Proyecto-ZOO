@@ -229,10 +229,7 @@ public class VentanaVisitante extends JFrame{
 
 	
 }
-	/* private void lanzarVideo(String urlVideo) {
-		component.mediaPlayer().audio().setVolume(75); // para que no salga a tope el volúmen
-		component.mediaPlayer().media().play(urlVideo);
-	} */
+
 }
 	
 	
