@@ -37,7 +37,7 @@ public class VentanaVideo extends JFrame{
         
         JPanel panelCentro = new JPanel();
         JPanel panelCentroNorte = new JPanel();
-        panelCentroNorte.add(component);
+//        panelCentroNorte.add(component);
         panelCentro.add(panelCentroNorte, BorderLayout.NORTH);
         JPanel panelCentroSur = new JPanel();
         JButton btn1 = new JButton("Botón 1");
@@ -56,7 +56,7 @@ public class VentanaVideo extends JFrame{
         getContentPane().add(pSur, BorderLayout.SOUTH);
         pSur.add(btnVolver);
 		
-		component.mediaPlayer().media().play("C:\\Users\\unaio\\Downloads/DjMaRiiO _ Strip Fifa #2 _ Xf.3gp");
+//		component.mediaPlayer().media().play("C:\\Users\\unaio\\Downloads/DjMaRiiO _ Strip Fifa #2 _ Xf.3gp");
 
         setVisible(true);
 		
