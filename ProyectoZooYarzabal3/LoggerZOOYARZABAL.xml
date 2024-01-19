@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2024-01-12T18:43:51.435206100Z</date>
-  <millis>1705085031435</millis>
-  <nanos>206100</nanos>
+  <date>2024-01-19T14:27:51.468417700Z</date>
+  <millis>1705674471468</millis>
+  <nanos>417700</nanos>
   <sequence>0</sequence>
   <logger>Logger BD</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>Conexión establecida a BD</message>
 </record>
 <record>
-  <date>2024-01-12T18:43:51.469875400Z</date>
-  <millis>1705085031469</millis>
-  <nanos>875400</nanos>
+  <date>2024-01-19T14:27:51.499746200Z</date>
+  <millis>1705674471499</millis>
+  <nanos>746200</nanos>
   <sequence>1</sequence>
   <logger>Logger BD</logger>
   <level>WARNING</level>
@@ -26,9 +26,9 @@
   <message>Error al crear las tablas, anteriormente creadas</message>
 </record>
 <record>
-  <date>2024-01-12T18:43:51.470873600Z</date>
-  <millis>1705085031470</millis>
-  <nanos>873600</nanos>
+  <date>2024-01-19T14:27:51.500752700Z</date>
+  <millis>1705674471500</millis>
+  <nanos>752700</nanos>
   <sequence>2</sequence>
   <logger>Logger BD</logger>
   <level>WARNING</level>
@@ -38,9 +38,9 @@
   <message>Error en la introducción de datos a las tablas, ya estaban anteriormente creadas</message>
 </record>
 <record>
-  <date>2024-01-12T18:43:51.471877500Z</date>
-  <millis>1705085031471</millis>
-  <nanos>877500</nanos>
+  <date>2024-01-19T14:27:51.501755900Z</date>
+  <millis>1705674471501</millis>
+  <nanos>755900</nanos>
   <sequence>3</sequence>
   <logger>Logger BD</logger>
   <level>INFO</level>

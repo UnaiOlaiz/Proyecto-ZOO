@@ -94,7 +94,6 @@ public class Zoo {
 			pw.flush();
 			pw.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -124,15 +123,11 @@ public class Zoo {
 	public static void guardarListaTrabajadoresEnFichero(String nomfich) {
 		try {
 			PrintWriter pw = new PrintWriter(nomfich);
-//			for(Trabajador t: trabajadores) {
-//				pw.println(t.getDNI()+";"+t.getNombre()+";"+t.getCon());
-//			}
-			
+
 			
 			pw.flush();
 			pw.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block //
 			System.err.println( "No se ha podido registrar el trabajador, compruebe la ubicación del fichero." );
 			e.printStackTrace();
 		}

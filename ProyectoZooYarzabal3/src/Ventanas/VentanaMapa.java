@@ -21,8 +21,10 @@ public class VentanaMapa extends JFrame {
         setTitle( "MAPA DEL ZOO" );
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
+        ClassLoader classLoader = getClass().getClassLoader();
 
-        ImageIcon icono = new ImageIcon("mapaZoo.png");
+        ImageIcon icono = new ImageIcon(classLoader.getResource("Imagenes/mapaZoo.png"));
         Image imagen = icono.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         ImageIcon nuevoIcono = new ImageIcon(imagen);
         labelImagen = new JLabel(nuevoIcono);

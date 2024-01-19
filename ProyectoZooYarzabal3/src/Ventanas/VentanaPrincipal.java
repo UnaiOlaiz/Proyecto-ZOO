@@ -33,6 +33,7 @@ public class VentanaPrincipal {
 		ventana.setLocationRelativeTo(null);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        ClassLoader classLoader = getClass().getClassLoader();
         
         //Panel para los botones
         JPanel pnlBotones = new JPanel();
@@ -44,7 +45,7 @@ public class VentanaPrincipal {
          * de la ventana que se abrirá al ejecutar el programa
          */
         
-        ImageIcon icono = new ImageIcon("FotoLogo.png"); 
+        ImageIcon icono = new ImageIcon(classLoader.getResource("Imagenes/FotoLogo.png")); 
         Image imagen = icono.getImage();
         Image nuevaImagen = imagen.getScaledInstance(ventana.getWidth(), ventana.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon nuevoIcono = new ImageIcon(nuevaImagen);

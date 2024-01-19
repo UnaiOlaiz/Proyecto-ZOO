@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -53,6 +54,7 @@ public class VentanaTrabajador extends JFrame{
 		lblTitulo.setForeground(new Color(70, 130, 180));
 	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 30));
 
+		ClassLoader classLoader = getClass().getClassLoader();
 
 	    pNorte = new JPanel();
 	    pNorte.setBackground(Color.WHITE);
@@ -131,7 +133,8 @@ public class VentanaTrabajador extends JFrame{
         btnInicio.setFont(new Font("Times New Roman", Font.BOLD, 14));
         btnInicio.setForeground(new Color(70, 130, 180));
         btnRegistro.setFont(new Font("Times New Roman", Font.BOLD, 14));
-
+        
+        
         
         JPanel pSur = new JPanel();
         getContentPane().add(pSur, BorderLayout.SOUTH);
@@ -143,7 +146,7 @@ public class VentanaTrabajador extends JFrame{
         btnVolver.addActionListener((e)->{
         	vAnterior.setVisible(true);
 			vActual.dispose();
-			Zoo.guardarListaTrabajadoresEnFichero("Trabajadores.csv");
+			Zoo.guardarListaTrabajadoresEnFichero("Langileak.csv");
         });
              
        
@@ -163,7 +166,7 @@ public class VentanaTrabajador extends JFrame{
 				if (!trabajadors.contains(t)) {
 					try {
 						
-		 			PrintWriter pw = new PrintWriter(new FileWriter("Empleados.csv", true));
+		 			PrintWriter pw = new PrintWriter(new FileWriter("Langileak.csv", true));
 						pw.println( dni + ";" + nom + ";" + p_tra + ";" + con );
 						JOptionPane.showMessageDialog(null, "Cliente registrado correctamente","REGISTRADO CORRECTAMENTE",JOptionPane.INFORMATION_MESSAGE);
 						System.out.println(t.toString());
@@ -213,7 +216,7 @@ public class VentanaTrabajador extends JFrame{
         	
         	if (!(txtDniIS.getText().trim().isEmpty() || txtconIS.getText().trim().isEmpty())) {
         		try {
-            		Scanner sc = new Scanner(new FileReader( "Empleados.csv" ));
+            		Scanner sc = new Scanner(new FileReader( "Archivos/Empleados.csv" ));
             		String linea;
             		while (sc.hasNext()) {
     					linea = sc.nextLine();

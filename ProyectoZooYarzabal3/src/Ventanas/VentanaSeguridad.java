@@ -107,10 +107,11 @@ public class VentanaSeguridad extends JFrame {
 	    panelNorte.add(panelExplicacion3);
 	    
 	    getContentPane().add(panelNorte, BorderLayout.NORTH);
+	    ClassLoader classLoader = getClass().getClassLoader();
 	    
 	    JPanel panelCentro = new JPanel();
 	    panelCentro.setBackground(new Color(70, 130, 180));
-	    ImageIcon icono = new ImageIcon("fotoRadio.png"); 
+	    ImageIcon icono = new ImageIcon(classLoader.getResource("Imagenes/fotoRadio.png")); 
         Image imagen = icono.getImage();
         Image nuevaImagen = imagen.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         ImageIcon nuevoIcono = new ImageIcon(nuevaImagen);
