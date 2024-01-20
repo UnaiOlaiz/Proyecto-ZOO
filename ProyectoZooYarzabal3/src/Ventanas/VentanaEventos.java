@@ -98,8 +98,8 @@ public class VentanaEventos extends JFrame{
                 "🐬 Actuaciones Asombrosas: Observa a nuestras estrellas marinas en su esplendor mientras realizan impresionantes acrobacias y demostraciones de agilidad. Desde saltos elegantes hasta juegos interactivos, te sorprenderás con su inteligencia.\n\n" +
                 "🌊 Educación y Conservación: Descubre más sobre la vida marina mientras nuestros expertos comparten información valiosa sobre la conservación de estas especies asombrosas. Tu participación contribuye a la preservación de los océanos y sus habitantes.\n\n" +
                 "📅 Fechas y Horarios (Enero) \n" +
-                "Sesión 1: 02-01.2024 - 13:30\n" +
-                "Sesión 2: 17-01-2024 - 10:00 \n\n" +
+                "Sesión 1: Lunes - 13:30\n" +
+                "Sesión 2: Miércoles - 10:00 \n\n" +
                 "Entradas:\n" +
                 "Adquiere tus entradas ahora y asegura tu lugar para este espectáculo único. ¡No te pierdas la oportunidad de sumergirte en la magia del océano en vivo!");
 		area.setCaretPosition(0);
@@ -136,7 +136,7 @@ public class VentanaEventos extends JFrame{
                 "🦁 Actuaciones Impresionantes: Observa a nuestros leones en su máximo esplendor mientras realizan increíbles acrobacias y demostraciones de fuerza. Desde saltos elegantes hasta demostraciones de destreza, te asombrarás con su agilidad.\n\n" +
                 "🌍 Educación y Conservación: Descubre más sobre la vida y el comportamiento de los leones mientras nuestros expertos comparten información valiosa sobre la conservación de esta especie majestuosa. Tu participación contribuye a la preservación de estos magníficos animales.\n\n" +
                 "📅 Fechas y Horarios (Enero) :\n" +
-                "12-01-2024 - 13-01-2024 - 20-01-2024\n" +
+                "Martes " +
                 "12:30\n\n" +
                 "Entradas:\n" +
                 "Adquiere tus entradas ahora y asegura tu lugar para este espectáculo único. ¡No te pierdas la oportunidad de presenciar la grandeza de los leones en vivo!\n\n" +
@@ -176,8 +176,8 @@ public class VentanaEventos extends JFrame{
                 "❄️ Actuaciones Impresionantes: Observa a nuestros habitantes del frío en su máximo esplendor mientras realizan increíbles acrobacias y demostraciones de agilidad. Desde giros elegantes hasta demostraciones de fuerza, te sorprenderás con su resistencia al clima extremo.\n\n" +
                 "🌐 Educación y Conservación: Descubre más sobre la vida en el Ártico mientras nuestros expertos comparten información valiosa sobre la conservación de estas especies fascinantes. Tu participación contribuye a la preservación de estos increíbles animales y sus hábitats únicos.\n\n" +
                 "📅 Fechas y Horarios:\n" +
-                "Dias: Todos los viernes y sabados\n" +
-                "Función 2: 15:00\n\n" +
+                "Dias: Todos los viernes y sábados " +
+                "a las 15:00\n\n" +
                 "Entradas:\n" +
                 "Adquiere tus entradas ahora y asegura tu lugar para este espectáculo polar único. ¡No te pierdas la oportunidad de sumergirte en la maravilla del Ártico en vivo!\n\n" +
                 "¡Únete a nosotros para un día inolvidable lleno de aventura polar, conocimiento y asombro en el espectáculo del Zoológico Frígido!");
@@ -215,10 +215,10 @@ public class VentanaEventos extends JFrame{
                 "🐅 Actuaciones Impactantes: Observa a nuestros tigres en su máximo esplendor mientras realizan impresionantes acrobacias y demostraciones de agilidad. Desde saltos majestuosos hasta demostraciones de destreza, te asombrarás con su fuerza y gracia.\n\n" +
                 "🌳 Educación y Conservación: Descubre más sobre la vida de los tigres y la importancia de preservar su hábitat mientras nuestros expertos comparten información valiosa. Tu participación contribuye a la conservación de estas magníficas criaturas y sus hogares naturales.\n\n" +
                 "📅 Fechas y Horarios:\n" +
-                "Presentación 1: 10-01-2024 13:00\n" +
-                "Presentación 2: 12-01-2024 13:00 \n" +
-                "Presentación 3: 16-01-2024 13:00 \n" +
-                "Presentación 4: 23-01-2024 14:00 \n\n" +
+                "Presentación 1: Martes 13:00\n" +
+                "Presentación 2: Miércoles 13:00 \n" +
+                "Presentación 3: Jueves 13:00 \n" +
+                "Presentación 4: Sábados 14:00 \n\n" +
                 "Entradas:\n" +
                 "Adquiere tus entradas ahora y asegura tu lugar para este espectáculo único en el Zoológico Salvaje. ¡No te pierdas la oportunidad de sumergirte en la majestuosidad del hábitat del tigre en vivo!\n\n" +
                 "¡Únete a nosotros para un día inolvidable lleno de maravilla, conocimiento y asombro en el espectáculo \"El Hábitat del Tigre\" del Zoológico Salvaje!");
