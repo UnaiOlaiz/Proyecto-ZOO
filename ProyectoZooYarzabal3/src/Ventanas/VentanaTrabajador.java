@@ -75,7 +75,7 @@ public class VentanaTrabajador extends JFrame{
 		lblPuestoR = new JLabel("Puesto de trabajo:");
 		lblPuestoR.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		lblPuestoR.setForeground(new Color(70, 130, 180));
-		String[] opcionesArray = {"Elige una opcion", "LIMPIEZA", "MANTENIMIENTO", "CUIDADOR", "VETERINARIO", "GUIA", "ADMINISTRADOR", "DISEÑADOR DE EVENTOS", "TAQUILLERO", "GUARDIA DE SEGURIDAD"};
+		String[] opcionesArray = {"Elige una opcion", "LIMPIEZA","CUIDADOR", "VETERINARIO", "GUIA", "ADMINISTRADOR", "DISEÑADOR DE EVENTOS", "TAQUILLERO", "GUARDIA DE SEGURIDAD"};
         
 		
 		
