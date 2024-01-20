@@ -1,122 +1,117 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import BaseDeDatos.VisualizarBD;
+import Zoo.Empleado;
 
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
 
-import javax.swing.JPanel;
-
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-
-public class VentanaAdministrador extends JFrame{
-	protected JFrame vActual, vAnterior;
-	protected JButton btnVolver;
-	protected JPanel pSur;
-	// Lista de trabajadores
-    private JList<String> listaTrabajadores;
-
-    // Área para mostrar datos del trabajador
-    private JTextArea datosTrabajador;
-	
-	public VentanaAdministrador(JFrame va) {
-		super();
-		vActual = this;
-		vAnterior = va;
-		setTitle("Ventana del Administrador");
+public class VentanaAdministrador extends JFrame {
+    protected JFrame vActual, vAnterior;
+    protected JButton btnVolver, btnVerEmpleados;
+    protected JPanel pSur;
+    private JTable tablaEmpleados;
+    private JScrollPane scrollPane;
+    private JButton btnAgregarEmpleado, btnDespedirEmpleado;
+    private JButton btnFinanzas, btnGestionAlimentos;
+    
+    
+    
+    public VentanaAdministrador(JFrame va) {
+        super();
+        vActual = this;
+        vAnterior = va;
+        setTitle("Ventana del Administrador");
         setBounds(500, 300, 700, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         btnVolver = new JButton("VOLVER");
-        btnVolver.addActionListener((e)->{
-        	vAnterior.setVisible(true);
-        	vActual.dispose();
+        btnVolver.addActionListener((e) -> {
+            vAnterior.setVisible(true);
+            vActual.dispose();
         });
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("DNI");
+        model.addColumn("Nombre");
+        model.addColumn("Puesto");
+        model.addColumn("Salario");
+        model.addColumn("Fecha Contratación");
+        
+        ArrayList<Empleado> empleados = VisualizarBD.visualizarEmpleados();
+ 
+        System.out.println(empleados); //Comprobacion
+
+        for (Empleado empleado : empleados) {
+            Object[] row = {
+                    empleado.getDNI(),
+                    empleado.getNombreEmpleado(),
+                    empleado.getPuestoEmpleado(),
+                    empleado.getSalarioEmpleado(),
+                    empleado.getFechaContratacion()
+            };
+            model.addRow(row);
+        }
+        
+        tablaEmpleados = new JTable(model);
+        
+        scrollPane = new JScrollPane(tablaEmpleados);
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
+        
+        
+        btnAgregarEmpleado = new JButton("Agregar Empleado");
+        btnAgregarEmpleado.addActionListener((e) -> {
+            // Poder contratar empleados
+        });
+        
+        btnDespedirEmpleado = new JButton("Despedir Empleado");
+        btnDespedirEmpleado.addActionListener((e) -> {
+            // Poder despedir empleados
+        });
+        
+        btnFinanzas = new JButton("Finanzas");
+        btnFinanzas.addActionListener((e) -> {
+            mostrarFinanzas(); // Función para mostrar las finanzas del zoológico
+        });
+        
+        
+        btnGestionAlimentos = new JButton("Gestión de Alimentos");
+        btnGestionAlimentos.addActionListener((e) -> {
+            gestionarAlimentos(); // Función para llevar a cabo la gestión de alimentos
+        });
+        
         pSur = new JPanel();
-        getContentPane().add(pSur, BorderLayout.SOUTH);
+        pSur.add(btnAgregarEmpleado);
+        pSur.add(btnDespedirEmpleado);
+        pSur.add(btnFinanzas);
+        pSur.add(btnGestionAlimentos);
         pSur.add(btnVolver);
         
         
-        // Crear la lista de trabajadores
-        String[] trabajadores = {"Trabajador 1", "Trabajador 2", "Trabajador 3"};
-        listaTrabajadores = new JList<>(trabajadores);
-        
-        
-     // Crear el área de datos del trabajador
-        datosTrabajador = new JTextArea();
-        datosTrabajador.setEditable(false);
 
-        // Crear botones
-        JButton btnFinanzas = new JButton("Finanzas");
-        JButton btnGestionAlimentos = new JButton("Gestión de Alimentos");
-        JButton btnRecursosHumanos = new JButton("Recursos Humanos");
-        
-        
-        //Action Listeners de los botones
-        btnFinanzas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-        
-        btnGestionAlimentos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-        
-        btnRecursosHumanos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-        
-     // Crear un contenedor principal
-        Container container = getContentPane();
-        container.setLayout(new BorderLayout());
+        getContentPane().add(pSur);
 
-        // Crear paneles para organizar los componentes
-        JPanel panelIzquierdo = new JPanel();
-        panelIzquierdo.setLayout(new BorderLayout());
-        panelIzquierdo.add(listaTrabajadores, BorderLayout.CENTER);
-        panelIzquierdo.add(datosTrabajador, BorderLayout.SOUTH);
-
-        JPanel panelDerecho = new JPanel();
-        panelDerecho.setBackground(Color.LIGHT_GRAY);
-
-        JPanel panelAbajo = new JPanel();
-        panelAbajo.add(btnFinanzas);
-        panelAbajo.add(btnGestionAlimentos);
-        panelAbajo.add(btnRecursosHumanos);
-
-        // Agregar paneles al contenedor principal
-        container.add(panelIzquierdo, BorderLayout.WEST);
-        container.add(panelDerecho, BorderLayout.CENTER);
-        container.add(panelAbajo, BorderLayout.SOUTH);
-        
         setVisible(true);
-	}
-	
-	/*public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new VentanaAdministrador();
-            }
-        });
+    }
+    
+    private void mostrarFinanzas() {
+    	
+    	JOptionPane.showMessageDialog(this, "Gestión financiera aqui");
+    }
+    
+    private void gestionarAlimentos() {
+        
+        JOptionPane.showMessageDialog(this, "Gestión de alimentos aquí");
+    }
 
-}*/
-
+  
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new VentanaAdministrador(null));
+    }
 }
+
