@@ -216,7 +216,7 @@ public class VentanaTrabajador extends JFrame{
         	
         	if (!(txtDniIS.getText().trim().isEmpty() || txtconIS.getText().trim().isEmpty())) {
         		try {
-            		Scanner sc = new Scanner(new FileReader( "Archivos/Empleados.csv" ));
+            		Scanner sc = new Scanner(new FileReader( "Empleados.csv" ));
             		String linea;
             		while (sc.hasNext()) {
     					linea = sc.nextLine();

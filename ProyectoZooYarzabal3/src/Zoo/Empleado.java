@@ -33,10 +33,10 @@ public class Empleado {
 		Contrasena = contrasena;
 	}
 	
+	
 	@Override
 	public String toString() {
-		return "Empleado [DNI=" + DNI + ", NombreEmpleado=" + NombreEmpleado + ", PuestoEmpleado=" + PuestoEmpleado
-				+ ", Contrasena=" + Contrasena + "]";
+		return "Empleado [NombreEmpleado=" + NombreEmpleado + ", PuestoEmpleado=" + PuestoEmpleado + "]";
 	}
 	public String getDNI() { 
 		return DNI;

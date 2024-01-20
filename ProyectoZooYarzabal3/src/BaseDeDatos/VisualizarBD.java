@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -20,6 +21,7 @@ import Zoo.Animal;
 import Zoo.Empleado;
 import Zoo.Exhibicion;
 import Zoo.Habitat;
+import Zoo.Puesto;
 import Zoo.Visitante;
 
 public class VisualizarBD {
@@ -398,8 +400,63 @@ public class VisualizarBD {
 		return leones;
 	}
 
-
+	public static ArrayList<Animal> cargarAnimalesEnfermos(){
+		ArrayList<Animal> animalesEnfermos = new ArrayList<>();
+		try {
+			String sentenciaSQL = "SELECT * FROM Animales";
+			Statement statement = conexion.createStatement();
+			ResultSet rs = statement.executeQuery(sentenciaSQL);
+			ArrayList<Animal> animales = new ArrayList<>();
+			while (rs.next()) {
+				String id_animal = rs.getString("id_animal");
+                String nombre = rs.getString("nombre");
+                String especie = rs.getString("especie");
+                String habitat = rs.getString("habitat");
+                
+                Animal animalEnfermo = new Animal();
+                animalEnfermo.setId_animal(id_animal);
+                animalEnfermo.setNombre(nombre);
+                animalEnfermo.setEspecie(especie);
+                animalEnfermo.setHabitat(habitat);
+                
+                animales.add(animalEnfermo);
+			}
+			rs.close();
+			// Sólo vamos a seleccionar 5 para que el combobox no esté sobrecargado
+			Collections.shuffle(animales);
+			if (animales.size() >= 5) {
+				animalesEnfermos.addAll(animales.subList(0, 5));
+			} else {
+				System.err.println("Erro pa");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return animalesEnfermos;
+	}
+	
+	public static ArrayList<Empleado> cargarVeterinarios(){
+		ArrayList<Empleado> veterinarios = new ArrayList<>();
+		try {
+			String SentSQL = "SELECT * FROM Empleados WHERE puesto = 'Veterinario'";
+			Statement statement = conexion.createStatement();
+			ResultSet rs = statement.executeQuery(SentSQL);
+			while (rs.next()) {
+				int id_empleado = rs.getInt("id_empleado");
+				String nombre = rs.getString("nombre");
+				String puesto = rs.getString("puesto");
+				Puesto puesto2 = Puesto.valueOf(puesto.toUpperCase());
+				
+				Empleado vet = new Empleado();
+				vet.setNombreEmpleado(nombre);
+//				vet.setPuestoEmpleado(puesto2);
+			
+				veterinarios.add(vet);
+			}
+		} catch (Exception e) {e.printStackTrace();}
+		return veterinarios;
+	}
 
 	
-
+	
 }

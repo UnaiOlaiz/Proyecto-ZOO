@@ -1,17 +1,23 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import BaseDeDatos.VisualizarBD;
+import Zoo.Animal;
 import Zoo.AnimalAntiguo;
 import Zoo.AsignacionVet_Ani;
+import Zoo.Empleado;
 import Zoo.Puesto;
 import Zoo.Trabajador;
 import Zoo.ZOO;
@@ -21,8 +27,8 @@ public class VentanaVeterinario extends JFrame {
 
     protected JButton botonAsignar;
     protected JTextArea textoAsignaciones;
-    protected JComboBox<Trabajador> comboVeterinarios;
-    protected JComboBox<AnimalAntiguo> comboAnimalesEnfermos;
+    protected JComboBox<Empleado> comboVeterinarios;
+    protected JComboBox<Animal> comboAnimalesEnfermos;
     protected JComboBox<AsignacionVet_Ani> comboHistorialDeAsignaciones;
     protected JFrame vActual, vAnterior;
 
@@ -30,28 +36,42 @@ public class VentanaVeterinario extends JFrame {
     	super();
 		vActual = this;
 		vAnterior = va;
+		setResizable(false);
         // Atributos principales de la ventana
         setTitle("Ventana de Veterinario");
         setLocationRelativeTo(null);
-        setBounds(500, 300, 700, 250);
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setBounds(500, 300, 700, 350);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panelMensaje = new JPanel();
+        panelMensaje.setBackground(new Color(70, 130, 180));
         JLabel labelMensaje = new JLabel("Regular asignaciones de animales enfermos a cada veterinario");
+        labelMensaje.setForeground(Color.WHITE);
+        labelMensaje.setFont(new Font("Times New Roman", Font.BOLD, 20));
         panelMensaje.add(labelMensaje);
 
         JPanel panelCombos = new JPanel();
+        panelCombos.setBackground(new Color(70, 130, 180));
         panelCombos.setLayout(new GridLayout(1, 2));
 
-        comboAnimalesEnfermos = new JComboBox<AnimalAntiguo>();
+        comboAnimalesEnfermos = new JComboBox<Animal>();
         Border bordeAnimalesEnfermos = BorderFactory.createTitledBorder("Animales enfermos: ");
+        
         comboAnimalesEnfermos.setBorder(bordeAnimalesEnfermos);
         panelCombos.add(comboAnimalesEnfermos);
+        ArrayList<Animal> animalesEnfermos = VisualizarBD.cargarAnimalesEnfermos();
+        animalesEnfermos.forEach(animal -> {
+        	comboAnimalesEnfermos.addItem(animal);
+        });
 
-        comboVeterinarios = new JComboBox<Trabajador>();
+        comboVeterinarios = new JComboBox<Empleado>();
         Border bordeVeterinarios = BorderFactory.createTitledBorder("Veterinarios disponibles: ");
         comboVeterinarios.setBorder(bordeVeterinarios);
         panelCombos.add(comboVeterinarios);
+        Empleado vet1 = new Empleado();
+        vet1.setNombreEmpleado("Carlos Rodriguez");
+        vet1.setPuestoEmpleado("Veterinario");
+        comboVeterinarios.addItem(vet1);
 
         // Parte del textArea
         JPanel panelTexto = new JPanel();
@@ -62,41 +82,50 @@ public class VentanaVeterinario extends JFrame {
 
         JPanel panelBotones = new JPanel();
         botonAsignar = new JButton("Asignar veterinario");
+        botonAsignar.setForeground(new Color(70, 130, 180));
+        botonAsignar.setFont(new Font("Times New Roman", Font.BOLD, 14));
         botonAsignar.setEnabled(true);
         botonAsignar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implementa la lógica de asignación aquí
+            	Animal animalEnfermoSeleccionado = (Animal) comboAnimalesEnfermos.getSelectedItem();
+            	Empleado vetSeleccionado = (Empleado) comboVeterinarios.getSelectedItem();
+            	
+            	if (animalEnfermoSeleccionado != null && vetSeleccionado != null) {
+            		Date fechaHoy = new Date(System.currentTimeMillis());
+                    SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                    String fechaFinal = formatoFecha.format(fechaHoy);
+                    String asignacion = String.format("[%s] Asignación: Veterinario - %s, Animal - %s\n", fechaFinal,
+                            vetSeleccionado.getNombreEmpleado(), animalEnfermoSeleccionado.getNombre());
+            		
+            		textoAsignaciones.append(asignacion);
+            		
+            		comboAnimalesEnfermos.removeItem(animalEnfermoSeleccionado); // Quitamos al animal al ser curado
+            		// Al vet no ya que ha de seguir trabajando
+            	
+            	} else if (comboAnimalesEnfermos.getItemCount() == 0) {
+            		JOptionPane.showMessageDialog(null, "No quedan más animales a atender.",
+                            "Error de asignación", JOptionPane.ERROR_MESSAGE);
+            	} else {
+                    JOptionPane.showMessageDialog(null, "Por favor, seleccione un animal y un veterinario.",
+                            "Error de asignación", JOptionPane.ERROR_MESSAGE);
+                }
+            	
             }
         });
         
-        JButton botonVolver = new JButton("VOLVER");
+        JButton botonVolver = new JButton("Volver");
+        botonVolver.setForeground(new Color(70, 130, 180));
+        botonVolver.setFont(new Font("Times New Roman", Font.BOLD, 14));
         botonVolver.addActionListener((e)->{
         	vAnterior.setVisible(true);
 			vActual.dispose();
         });
         
-        JButton botonSalir = new JButton("Salir");
-        botonSalir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-
-        JButton botonHistorial = new JButton("Historial");
-        botonHistorial.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Implementa la lógica de historial aquí
-            }
-        });
-
-        panelBotones.add(botonVolver);
         panelBotones.add(botonAsignar);
-        panelBotones.add(botonHistorial);
-        panelBotones.add(botonSalir);
-
+        panelBotones.setBackground(new Color(70, 130, 180));
+        panelBotones.add(botonVolver);
+        
         setLayout(new GridLayout(4, 1));
         add(panelMensaje);
         add(panelCombos);
@@ -106,200 +135,5 @@ public class VentanaVeterinario extends JFrame {
         setVisible(true);
     }
 
-    /*public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new VentanaVeterinario();
-            }
-        });
-    }*/
-
-/**
-*
-*/
-/*		private static final long serialVersionUID = 1L;
-		
-		// Algunos Componentes
-		protected ZOO zoo;
-		protected JButton botonAsignar;
-		protected JTextArea textoAsignaciones;
-		protected JComboBox<Trabajador> comboVeterinarios;
-		protected JComboBox<Animal> comboAnimalesEnfermos;
-		protected JComboBox<AsignacionVet_Ani> comboHistorialDeAsignaciones;
-		
-		public VentanaVeterinario(JFrame va) {
-			vActual = this;
-			vAnterior = va;
-			this.zoo = new ZOO();
-			
-			// Atributos principales de la ventana
-			setTitle("Ventana de Veterinario");
-			setLocationRelativeTo(null);
-			setSize(400, 300);
-			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			setLayout(new GridLayout(4, 1));
-			
-			JPanel panelMensaje = new JPanel();
-			JLabel labelMensaje = new JLabel("Regular asignaciones de animales enfermos a cada veterinario");
-			panelMensaje.add(labelMensaje);
-			
-			// Panel donde irán los comboBoxes
-			JPanel panelCombos = new JPanel();
-			panelCombos.setLayout(new GridLayout(1,2));
-			
-			// Ejecutamos las funciones de antes
-			
-			comboAnimalesEnfermos = new JComboBox<Animal>();
-			panelCombos.add(comboAnimalesEnfermos, BorderLayout.WEST);
-			Border bordeAnimalesEnfermos = BorderFactory.createTitledBorder("Animales enfermos: ");
-			comboAnimalesEnfermos.setBorder(bordeAnimalesEnfermos);
-			
-			for(Animal a : this.zoo.getAnimales()) {
-			if(a.isEnfermo() == true) {
-			comboAnimalesEnfermos.addItem(a);
-			}
-			}
-			
-			comboVeterinarios = new JComboBox<Trabajador>();
-			panelCombos.add(comboVeterinarios, BorderLayout.CENTER);
-			Border bordeVeterinarios = BorderFactory.createTitledBorder("Veterinarios disponibles: ");
-			comboVeterinarios.setBorder(bordeVeterinarios);
-			
-			for(Trabajador t : this.zoo.getTrabajadores()) {
-			if(t.getPuesto().equals(Puesto.VETERINARIO)) {
-			comboVeterinarios.addItem(t);
-			}
-			}
-			
-			// comboHistorialDeAsignaciones = new JComboBox<AsignacionVet_Ani>();
-			// panelCombos.add(comboHistorialDeAsignaciones, BorderLayout.EAST);
-			// Border bordeAsignaciones = BorderFactory.createTitledBorder("Historial de asignaciones: ");
-			// comboHistorialDeAsignaciones.setBorder(bordeAsignaciones);
-			
-			
-			
-			// Parte del textArea
-			JPanel panelTexto = new JPanel();
-			textoAsignaciones = new JTextArea(10, 30);
-			textoAsignaciones.setLineWrap(true);
-			textoAsignaciones.setWrapStyleWord(true);
-			JScrollPane paneTexto = new JScrollPane(textoAsignaciones);
-			
-			
-			// Panel donde irán los botones
-			botonAsignar = new JButton("Asignar veterinario");
-			botonAsignar.addActionListener(new ActionListener() {
-			// Elegiremos un veterinario y a un animal para realizar la asignación
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			Trabajador veterinario = (Trabajador) comboVeterinarios.getSelectedItem();
-			Animal animalEnfermo = (Animal) comboAnimalesEnfermos.getSelectedItem();
-			
-			AsignacionVet_Ani nuevaAsignacion = new AsignacionVet_Ani();
-			// Añadimos los elementos pertenecientes a la asignación
-			// y los eliminamos de sus ComboBox respectivos
-			nuevaAsignacion.setAnimal(animalEnfermo);
-			comboAnimalesEnfermos.removeItem(animalEnfermo); // Retiramos el animal enfermo
-			nuevaAsignacion.setTrabajador(veterinario);
-			comboVeterinarios.removeItem(veterinario); // También retiraremos el veterinario temporalmente, hasta finalizar su trabajo
-			nuevaAsignacion.setFecha(new Date());
-			
-			// Implementamos el hilo
-			Thread hilo = new Thread() {
-			public void run() {
-			// Añadimos un poco de textito
-			textoAsignaciones.append("Escogiendo veterinario para tratar al animal... \n");
-			try {
-			Thread.sleep(1000);
-			}catch (InterruptedException e) { }
-			textoAsignaciones.append("... \n");
-			try {
-			Thread.sleep(1000);
-			}catch (InterruptedException e) {
-			}
-			textoAsignaciones.append("... \n");
-			try {
-			Thread.sleep(1000);
-			}catch (InterruptedException e) {
-			}
-			textoAsignaciones.append(nuevaAsignacion.toString());
-			try {
-			Thread.sleep(1000);
-			}catch (InterruptedException e) { }
-			textoAsignaciones.append("... \n");
-			try {
-			Thread.sleep(1000);
-			}catch (InterruptedException e) {
-			}
-			Random mesesRand = new Random();
-			int numeroDeMesesAleatorio = mesesRand.nextInt(24) + 1;
-			textoAsignaciones.append("El tratamiento durará " + numeroDeMesesAleatorio + "meses. \n");
-			try {
-			Thread.sleep(500);
-			}catch (InterruptedException e) { }
-			textoAsignaciones.append("... \n");
-			textoAsignaciones.append("Tratando al animal... \n");
-			try {
-			Thread.sleep(500);
-			}catch (InterruptedException e) { }
-			textoAsignaciones.append("... \n");
-			Random tiempoRecuperacionRandom = new Random();
-			int tiempodeRecuperacionRandom = tiempoRecuperacionRandom.nextInt(10000) + 1;
-			try {
-			Thread.sleep(tiempodeRecuperacionRandom);
-			}catch (InterruptedException e) { }
-			textoAsignaciones.append("El animal " + animalEnfermo.getID() + "ha sido correctamente tratado por el veterinario " + veterinario.getDNI() +". \n");
-			textoAsignaciones.append("... \n");
-			comboVeterinarios.addItem(veterinario); // Ahora el veterinario estará nuevamente disponible
-			
-			// Añadimos la asignación al JComboBox de asignaciones pasadas
-			comboHistorialDeAsignaciones.addItem(nuevaAsignacion);
-			}
-			
-			};
-			botonAsignar.setEnabled(false);
-			hilo.start();
-			
-			}
-			});
-			botonAsignar.setEnabled(true);
-			
-			JButton botonSalir = new JButton("Salir");
-			botonSalir.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			dispose();
-			}
-			});
-			
-			JButton botonHistorial = new JButton("Historial");
-			botonHistorial.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-			}
-			});
-			
-			JPanel panelBotones = new JPanel();
-			panelBotones.add(botonAsignar);
-			panelBotones.add(botonHistorial);
-			panelBotones.add(botonSalir);
-			
-			add(panelMensaje);
-			add(panelCombos);
-			add(paneTexto);
-			add(panelBotones);
-			setVisible(true);
-			}
-			
-			public static void main(String[] args) {
-			VentanaVeterinario ventVet = new VentanaVeterinario();
-			ventVet.setVisible(true);
-}*/
+    
 }

@@ -37,8 +37,8 @@ public class Animal {
 	}
 	@Override
 	public String toString() {
-		return "Animal [id_animal=" + id_animal + ", nombre=" + nombre + ", especie=" + especie + ", habitat=" + habitat
-				+ "]";
+	    return String.format("ID: %s | Nombre: %s | Especie: %s | Fecha Nacimiento: %s | Hábitat: %s",
+	                         id_animal, nombre, especie, fecha_nacimiento, habitat);
 	}
 	
 

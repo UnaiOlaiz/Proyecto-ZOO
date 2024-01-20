@@ -13,8 +13,8 @@
 	<classpathentry kind="lib" path="lib/jna-platform-5.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.27.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/jlayer-1.0.1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/unaio/Downloads/vlcj-3.10.1 (2)/vlcj-3.10.1/slf4j-api-1.7.10.jar"/>
-	<classpathentry kind="lib" path="C:/Users/unaio/Downloads/vlcj-4.7.1/vlcj-4.7.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/unaio/Downloads/vlcj-4.7.1/vlcj-natives-4.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.10.jar"/>
+	<classpathentry kind="lib" path="lib/vlcj-4.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/vlcj-natives-4.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
