@@ -29,7 +29,7 @@ public class VentanaPrincipal {
 		// Crear una ventana principal
         ventana = new JFrame("Ventana Principal");
         ventana.setBackground(Color.DARK_GRAY);
-		ventana.setBounds(500, 50, 600, 700);
+		ventana.setBounds(500, 50, 700, 700);
 		ventana.setLocationRelativeTo(null);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         

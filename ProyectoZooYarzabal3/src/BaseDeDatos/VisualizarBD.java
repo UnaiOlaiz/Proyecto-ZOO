@@ -3,6 +3,7 @@ package BaseDeDatos;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,6 +12,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import Zoo.Animal;
 import Zoo.Empleado;
@@ -21,8 +25,15 @@ import Zoo.Visitante;
 public class VisualizarBD {
 	
 	private static Connection conexion;
+	private static Logger logger;
 	
 	public static ArrayList<Empleado> visualizarEmpleados() {
+		try {
+			logger = java.util.logging.Logger.getLogger("Logger BD");
+			logger.addHandler(new FileHandler("LoggerZOOYARZABAL.xml"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		ArrayList<Empleado> empleados = new ArrayList<>();
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -152,7 +163,6 @@ public class VisualizarBD {
 			}
 		}catch ( ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			// TODO: handle exception
 		}
 		return animales;
 		
@@ -228,15 +238,168 @@ public class VisualizarBD {
 					}
 				}
 			}catch (Exception e) {
-				// TODO: handle exception
 			}
 		}catch ( ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			// TODO: handle exception
 		}
 		return exhibiciones;
 		
 	}
+	
+	
+
+	public static ArrayList<Animal> obtenerAnimalesArticos() {
+		ArrayList<Animal> animalesArticos = new ArrayList<>();
+		try {
+			String sentenciaSQL = "SELECT * FROM Animales WHERE habitat = ?;";
+			PreparedStatement preparedStatement = conexion.prepareStatement(sentenciaSQL);
+			preparedStatement.setString(1, "Polar");
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				String id_animal = rs.getString("id_animal");
+				String nombre = rs.getString("nombre");
+				String especie = rs.getString("especie");
+				String habitat = rs.getString("habitat");
+				
+				
+				Animal animalPolar = new Animal();
+				animalPolar.setId_animal(id_animal);
+				animalPolar.setNombre(nombre);
+				animalPolar.setEspecie(especie);
+				animalPolar.setHabitat(habitat);
+				
+				animalesArticos.add(animalPolar);
+				
+				
+				
+			}
+			rs.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+		}
+		return animalesArticos;
+	}
+
+	public static ArrayList<Animal> obtenerTortugas() {
+		ArrayList<Animal> tortugas = new ArrayList<>();
+		try {
+			String statementSQL = "SELECT * FROM Animales WHERE nombre = ?";
+			PreparedStatement preparedStatement = conexion.prepareStatement(statementSQL);
+			preparedStatement.setString(1, "Tortuga Marina");
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				String id_animal = rs.getString("id_animal");
+				String nombre = rs.getString("nombre");
+				String especie = rs.getString("especie");
+				String habitat = rs.getString("habitat");
+				
+				Animal tortuga = new Animal();
+				tortuga.setId_animal(id_animal);
+				tortuga.setNombre(nombre);
+				tortuga.setEspecie(especie);
+				tortuga.setHabitat(habitat);
+				
+				tortugas.add(tortuga);
+			}
+			rs.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tortugas;
+		
+	}
+
+	public static ArrayList<Animal> obtenerTigres() {
+		ArrayList<Animal> tigres = new ArrayList<>(); 
+		try {
+			String statementSQL = "SELECT * FROM Animales WHERE nombre = ?";
+			PreparedStatement preparedStatement = conexion.prepareStatement(statementSQL);
+			preparedStatement.setString(1, "Tigre");
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				String id_animal = rs.getString("id_animal");
+				String nombre = rs.getString("nombre");
+				String especie = rs.getString("especie");
+				String habitat = rs.getString("habitat");
+				
+				Animal tortuga = new Animal();
+				tortuga.setId_animal(id_animal);
+				tortuga.setNombre(nombre);
+				tortuga.setEspecie(especie);
+				tortuga.setHabitat(habitat);
+				
+				tigres.add(tortuga);
+			}
+			rs.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tigres;
+		
+	}
+
+	public static ArrayList<Animal> obtenerAnimalesAcuaticos() {
+		ArrayList<Animal> animalesAcuaticos = new ArrayList<>();
+		try {
+			String sentenciaSQL = "SELECT * FROM Animales WHERE habitat = ?;";
+			PreparedStatement preparedStatement = conexion.prepareStatement(sentenciaSQL);
+			preparedStatement.setString(1, "Océano");
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				String id_animal = rs.getString("id_animal");
+				String nombre = rs.getString("nombre");
+				String especie = rs.getString("especie");
+				String habitat = rs.getString("habitat");
+				
+				Animal animalMarino = new Animal();
+				animalMarino.setId_animal(id_animal);
+				animalMarino.setNombre(nombre);
+				animalMarino.setEspecie(especie);
+				animalMarino.setHabitat(habitat);
+				
+				animalesAcuaticos.add(animalMarino);
+			}
+			rs.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return animalesAcuaticos;
+	}
+
+	public static ArrayList<Animal> obtenerLeones() {
+		ArrayList<Animal> leones = new ArrayList<>(); 
+		try {
+			String statementSQL = "SELECT * FROM Animales WHERE nombre = ?";
+			PreparedStatement preparedStatement = conexion.prepareStatement(statementSQL);
+			preparedStatement.setString(1, "León");
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				String id_animal = rs.getString("id_animal");
+				String nombre = rs.getString("nombre");
+				String especie = rs.getString("especie");
+				String habitat = rs.getString("habitat");
+				
+				Animal tortuga = new Animal();
+				tortuga.setId_animal(id_animal);
+				tortuga.setNombre(nombre);
+				tortuga.setEspecie(especie);
+				tortuga.setHabitat(habitat);
+				
+				leones.add(tortuga);
+			}
+			rs.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return leones;
+	}
+
+
+
 	
 
 }

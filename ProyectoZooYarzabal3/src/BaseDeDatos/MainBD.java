@@ -6,7 +6,7 @@ public class MainBD {
 		ConexionABaseDeDatos.abrirConexion();
 		// VisualizarBD.visualizarEmpleados();
 		// VisualizarBD.visualizarHabitats();
-		// VisualizarBD.visualizarAnimales();
+		 VisualizarBD.visualizarAnimales();
 		// VisualizarBD.visualizarVisitantes();
 //		 VisualizarBD.visualizarExhibiciones();
 		ConexionABaseDeDatos.cerramosConexion();

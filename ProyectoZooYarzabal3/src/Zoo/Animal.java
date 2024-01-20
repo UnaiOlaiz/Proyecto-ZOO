@@ -38,7 +38,8 @@ public class Animal {
 	@Override
 	public String toString() {
 		return "Animal [id_animal=" + id_animal + ", nombre=" + nombre + ", especie=" + especie + ", habitat=" + habitat
-				+ ", fecha_nacimiento=" + fecha_nacimiento + "]";
+				+ "]";
 	}
+	
 
 }

@@ -18,3 +18,10 @@ El hábitat del Tigre en Vivo:
 Tortugas en acción: 
 - Lunes 14:00
 - Viernes 14:00
+
+Hábitats:
+- Maravillas acuáticas: Acuario, Océano.
+- Evento Leones: nombre = León. HECHO
+- Evento ártico: Polar.
+- Evento Tigres: nombre = Tigre. HECHO
+- Tortugas en Acción: nombre = Tortuga.

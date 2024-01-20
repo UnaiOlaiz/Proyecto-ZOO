@@ -44,6 +44,7 @@ public class VentanaGuia extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setBackground(Color.WHITE);
+        
         // Vamos con el mapa
         eventosPorDia = new HashMap<>();
         eventosPorDia.put("lunes", new ArrayList<>());

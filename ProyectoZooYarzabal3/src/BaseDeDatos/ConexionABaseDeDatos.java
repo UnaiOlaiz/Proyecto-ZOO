@@ -93,9 +93,22 @@ public class ConexionABaseDeDatos {
 				        + "(23, 'Panda Rojo', 'Ailurus fulgens', '2017-04-15', 'Macho', 'Bosque'),\r\n"
 				        + "(24, 'Camello', 'Camelus', '2019-01-22', 'Hembra', 'Desierto'),\r\n"
 				        + "(25, 'Lechuza', 'Tyto alba', '2013-08-08', 'Macho', 'Bosque'),\r\n"
-				        + "(26, 'Pantera', 'Panthera onca', '2014-06-07', 'Hembra', 'Selva');\r\n";
+				        + "(26, 'Pantera', 'Panthera onca', '2014-06-07', 'Hembra', 'Selva');\r\n"
+				        + "(271, 'León', 'Tyto alba', '2013-08-08', 'Macho', 'Bosque'),\r\n"
+				        + "(281, 'León', 'Tyto alba', '2013-07-08', 'Hembra', 'Bosque'),\r\n"
+				        + "(291, 'Tigre', 'Panthera tigris', '2002-02-28', 'Macho', 'Selva'),\r\n"
+				 		+"(272, 'Tortuga Marina', 'Cheloniidae', '2014-09-18', 'Macho', 'Océano')," +
+				    "(28, 'Tortuga Marina', 'Cheloniidae', '2016-03-22', 'Hembra', 'Océano')," +
+				    "(29, 'Tortuga Marina', 'Cheloniidae', '2015-11-10', 'Macho', 'Océano')," +
+				    "(30, 'Oso Polar', 'Ursus maritimus', '2012-12-15', 'Macho', 'Polar')," +
+				    "(31, 'Oso Polar', 'Ursus maritimus', '2014-02-28', 'Hembra', 'Polar')," +
+				    "(32, 'Pingüino', 'Spheniscidae', '2015-06-10', 'Macho', 'Polar')," +
+				    "(33, 'Pingüino', 'Spheniscidae', '2017-04-15', 'Hembra', 'Polar')," +
+				    "(34, 'León Marino', 'Otariidae', '2013-09-08', 'Macho', 'Océano')," +
+				    "(35, 'León Marino', 'Otariidae', '2015-07-08', 'Hembra', 'Océano');";
 
 				statement.executeUpdate(sent);
+				logger.log(Level.INFO, "Animales insertados");
 
 				
 				sent = "INSERT INTO Empleados (id_empleado, nombre, puesto, salario, fecha_contratacion) VALUES\r\n"
