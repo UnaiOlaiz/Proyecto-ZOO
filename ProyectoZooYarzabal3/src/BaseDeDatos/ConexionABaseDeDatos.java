@@ -1,6 +1,7 @@
 package BaseDeDatos;
 
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 
-import org.slf4j.Logger;
 
 import Zoo.Empleado;
 import Zoo.Trabajador;
